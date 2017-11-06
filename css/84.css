@@ -1,0 +1,63 @@
+@charset "utf-8";
+.wrap {overflow:hidden; background:url(../images/84/bg.jpg) no-repeat 0 0; background-size:768px 1024px;}
+.container{position:relative; width: 100%; height: 100%;}
+
+/* 버튼 레이아웃 */
+.btn:nth-child(1){top:583px;left:506px;} /*실험관찰*/
+.btn:nth-child(2){top:617px;left:663px;} /*실험관찰*/
+.btn:nth-child(3){top:649px;left:691px;} /*실험관찰*/
+.btn:nth-child(4){top:919px;left:498px;} /*초기화*/
+
+/*손가락 모양 지시문*/
+.finger{position:absolute;top:898px;left:259px;width:273px;height:19px;color:#ee8f14;z-index:1;}
+.finger span{line-height:19px;}
+
+/*tab*/
+.layer_wrap .sub_title .tabs{left:-105px;}
+
+/*textarea 크기 조절*/
+.view .layer_body .tab_layer textarea{height:120px;}
+
+/* 본문 */
+.txtbox.headbox{width:470px;top:63px;left:189px;}
+.titbox.tit01{top:77px;left:189px;}
+.titbox .title_big{font-size:25px;letter-spacing:-1.5px;}
+.txtbox.txt01{width:473px;top:186px;left:189px;}
+.txtbox.txt01 .sentence{letter-spacing:0px;}
+.txtbox.txt02{width:472px;top:246px;left:189px;}
+.txtbox.txt02 .sentence{letter-spacing:0px;}
+.titbox.titsub{top:354px;left:102px;}
+
+ul.tag_icon.ti01{top:384px;right:106px;}
+
+.bullet_cb.bul01{top:585px;left:189px;letter-spacing:-1.2px;}
+.bullet_cb.bul02{top:618px;left:189px;letter-spacing:-1.2px;}
+.bullet_cb.bul03{top:651px;left:189px;letter-spacing:-1.2px;}
+
+.imgbox.img01{position:absolute;top:460px;left:189px;}
+.imgbox.img01 img{width:182px;height:21px;}
+.imgbox.img02{position:absolute;top:461px;left:512px;}
+.imgbox.img02 img{width:186px;height:147px;}
+.imgbox.img03{position:absolute;top:680px;left:106px;}
+.imgbox.img03 img{width:600px;height:250px;}
+.imgbox.img04{position:absolute;top:781px;left:194px;}
+.imgbox.img04 img{width:415px;height:26px;}
+.imgbox.img05{position:absolute;top:797px;left:372px;}
+.imgbox.img05 img{width:60px;height:43px;}
+.imgbox.img06{position:absolute;top:864px;left:198px;}
+.imgbox.img06 img{width:35px;height:46px;}
+.imgbox.img07{position:absolute;top:864px;left:566px;}
+.imgbox.img07 img{width:35px;height:46px;}
+.imgbox.img08{position:absolute;top:838px;left:635px;}
+.imgbox.img08 img{width:35px;height:71px;}
+
+.img_tit{position:absolute;top:487px;left:192px;display:table;line-height:15px;}
+.img_tit li{display:table-cell;padding-top:6px;text-align:center;font-size:12px;font-weight:normal;color:#606060;letter-spacing:-1px;}
+.img_tit li:nth-child(1){padding-right:12px;}
+.img_tit li:nth-child(2){padding-right:11px;}
+
+/* 말풍선 */
+.bubble.b01{top:473px;left:574px;width:118px;z-index: 1;}
+.bubble.b02{top:782px;left:92px;width:118px;z-index: 1;}
+.bubble.b03{top:782px;left:594px;width:118px;z-index: 1;}
+.bubble.b04{top:854px;left:343px;width:118px;z-index: 1;}
