@@ -1,0 +1,102 @@
+@charset "utf-8";
+.wrap {overflow:hidden; /*background:url(../images/bg/096.jpg) no-repeat 0 0;*/ background-size:768px 1024px;}
+.wrap:after {
+	content: ""; display: block; position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+	z-index: -1; opacity : 0.4;
+	background:url(../images/bg/096.jpg) no-repeat 0 0;
+	background-size:768px 1024px;
+	overflow:hidden;}
+.container{position:relative; width: 100%; height: 100%;}
+
+/* 본문 */
+.titbox.tit01{top:69px;left:189px;}
+.titbox.tit01 p{font-size:32px}
+.titbox.tit02{top:298px;left:83px;}
+.txtbox.txt01{width:470px;top:166px;left:189px;}
+.txtbox.txt01 .sentence{letter-spacing: -0.3px;}
+
+.imgbox_wrap_02 .img01{background: url(../images/p96/a96_01.png) no-repeat; width:203px; height:174px; position:absolute; left:64px; top:342px; background-size:contain; z-index:-1;}
+.imgbox_wrap_02 .img02{background: url(../images/p96/a96_02.png) no-repeat; width:206px; height:174px; position:absolute; left:270px; top:342px; background-size:contain; z-index:-1;}
+.imgbox_wrap_02 .img03{background: url(../images/p96/a96_03.png) no-repeat; width:200px; height:174px; position:absolute; left:479px; top:342px; background-size:contain; z-index:-1;}
+.imgbox_wrap_02 .img04{background: url(../images/p96/a96_04.png) no-repeat; width:203px; height:174px; position:absolute; left:64px; top:531px; background-size:contain; z-index:-1;}
+.imgbox_wrap_02 .img05{background: url(../images/p96/a96_05.png) no-repeat; width:206px; height:174px; position:absolute; left:270px; top:531px; background-size:contain; z-index:-1;}
+.imgbox_wrap_02 .img06{background: url(../images/p96/a96_06.png) no-repeat; width:199px; height:174px; position:absolute; left:479px; top:531px; background-size:contain; z-index:-1;}
+.imgbox_wrap_02 .img07{background: url(../images/p96/a96_07.png) no-repeat; width:203px; height:174px; position:absolute; left:64px; top:721px; background-size:contain; z-index:-1;}
+.imgbox_wrap_02 .img08{background: url(../images/p96/a96_08.png) no-repeat; width:206px; height:174px; position:absolute; left:270px; top:721px; background-size:contain; z-index:-1;}
+.imgbox_wrap_02 .img09{background: url(../images/p96/a96_09.png) no-repeat; width:199px; height:174px; position:absolute; left:479px; top:721px; background-size:contain; z-index:-1;}
+
+/* 버튼 레이아웃 */
+.btn:nth-child(1){top:160px;left:43px;width:60px;} /*보충심화*/
+
+/*팝업 : 재정의*/
+.layer_wrap.study .layer_tab_01 .page_title.bul01{margin-bottom: 40px;}
+
+/* 카드 맞추기 게임 */
+.game_wrap{ width: 100%; height: auto; }
+.game_wrap .time{ width: 162px;	height: 143px; background: url(../images/p96/clock.png) 0 0 no-repeat; background-size: contain; float: right;}
+.game_wrap .time .num{ width: 100%; height: 52px; line-height: 52px; margin-top:91px; text-align: center; color: #317b91; font-size: 40px; font-weight: bold; }
+
+/* 카드 공통 */
+.game_wrap .card_image, .game_wrap .card_txt{ width: 473px; height: 362px; }
+.game_wrap .card_txt{ float: right; margin-top: 20px;}
+.game_wrap ul{ width: inherit; height: inherit; }
+.game_wrap li{ width: 155px; height: 118px;	margin-right: 4px; margin-bottom: 4px; float: left; position: relative; cursor: pointer;}
+.game_wrap li:nth-child(3n){ margin-right: 0px; }
+.game_wrap li:nth-child(n+6){ margin-bottom: 0px; }
+
+/* 사진 카드 */
+.game_wrap .card_image li:nth-child(1){background: url(../images/p96/card1_1.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_image li:nth-child(2){background: url(../images/p96/card1_back.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_image li:nth-child(3){background: url(../images/p96/card1_back.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_image li:nth-child(4){background: url(../images/p96/card1_back.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_image li:nth-child(5){background: url(../images/p96/card1_back.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_image li:nth-child(6){background: url(../images/p96/card1_back.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_image li:nth-child(7){background: url(../images/p96/card1_back.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_image li:nth-child(8){background: url(../images/p96/card1_back.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_image li:nth-child(9){background: url(../images/p96/card1_back.png) 0 0 no-repeat; background-size: contain;}
+
+/* 텍스트 카드 */
+.game_wrap .card_txt li:nth-child(1){background: url(../images/p96/card2_back.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_txt li:nth-child(2){background: url(../images/p96/card2_back.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_txt li:nth-child(3){background: url(../images/p96/card2_back.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_txt li:nth-child(4){background: url(../images/p96/card2_back.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_txt li:nth-child(5){background: url(../images/p96/card2_1.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_txt li:nth-child(6){background: url(../images/p96/card2_back.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_txt li:nth-child(7){background: url(../images/p96/card2_back.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_txt li:nth-child(8){background: url(../images/p96/card2_back.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_txt li:nth-child(9){background: url(../images/p96/card2_back.png) 0 0 no-repeat; background-size: contain;}
+
+/* 정답 동그라미 */
+.game_wrap li.true::before{ position: absolute; top:0px; left:3px; content: ''; display: block; width: 155px; height: 118px; background: url(../images/p96/ok.png) 0 0 no-repeat; background-size: contain;}
+
+/* 정답 화면 */
+.right_all{ position: absolute; top:280px; left:117px; width: 534px; height: 490px; background: url(../images/p96/final.png) 0 0 no-repeat; background-size: contain; }
+
+
+
+.earth_wrap .earth_mt{position:absolute;top:342px;left:64px; width:202px;height:174px;}
+.earth_wrap .earth_mt img{width:100%;height:100%;display:none;}
+
+/*손가락 모양 지시문*/
+.finger{position:absolute;top:297px;left:265px;width:auto;height:19px;color:#ee8f14;}
+.finger span{line-height:19px;}
+
+/*클릭시 사진 변경 earth부분*/
+.earth_btn .earth01{position:absolute;top:342px;left:64px;width:203px;height:174px;}
+.earth_btn .earth02{position:absolute;top:342px;left:270px;width:206px;height:174px;}
+.earth_btn .earth03{position:absolute;top:342px;left:479px;width:199px;height:174px;}
+.earth_btn .earth04{position:absolute;top:531px;left:64px;width:203px;height:174px;}
+.earth_btn .earth05{position:absolute;top:531px;left:270px;width:206px;height:174px;}
+.earth_btn .earth06{position:absolute;top:531px;left:480px;width:199px;height:174px;}
+.earth_btn .earth07{position:absolute;top:721px;left:64px;width:203px;height:174px;}
+.earth_btn .earth08{position:absolute;top:721px;left:270px;width:206px;height:174px;}
+.earth_btn .earth09{position:absolute;top:721px;left:479px;width:199px;height:174px;}
+.earth_btn .earth01 img{width:203px;height:174px}
+.earth_btn .earth02 img{width:206px;height:174px;}
+.earth_btn .earth03 img{width:199px;height:174px;}
+.earth_btn .earth04 img{width:203px;height:174px;}
+.earth_btn .earth05 img{width:206px;height:174px;}
+.earth_btn .earth06 img{width:199px;height:174px;}
+.earth_btn .earth07 img{width:203px;height:174px;}
+.earth_btn .earth08 img{width:206px;height:174px;}
+.earth_btn .earth09 img{width:199px;height:174px;}
