@@ -14,6 +14,45 @@
 	<script src="js/common.js"></script>
 	<script src="js/84.js"></script>
 	<script src="js/84_interaction.js"></script>
+
+	<style>
+	.test11 {transform:rotate(-10deg);}
+
+	.test1 {
+		/*
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 120px;
+		height: 120px;
+		margin:-60px 0 0 -60px;
+		*/
+		-webkit-animation:spin 4s linear;
+		-moz-animation:spin 4s linear;
+		animation:spin 4s linear;
+	}
+	@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+	@-webkit-keyframes spin { 100% { -webkit-transform: rotate(10deg); } }
+	@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(10deg); } }
+
+
+	</style>
+
+	<script>
+		/*
+		function setup() {
+		var e = document.getElementById("watchme");
+		e.addEventListener("animationstart", listener, false);
+		e.addEventListener("animationend", listener, false);
+		e.addEventListener("animationiteration", listener, false);
+		
+		var e = document.getElementById("watchme");
+			e.className = "slidein";
+		}
+		*/
+	</script>
+
+
 </head>
 <body>
 <div class="wrap"><!--[[ wrap Start ]]-->
@@ -74,7 +113,7 @@
 		<p class="bubble b01">수평이란 어느<br />한쪽으로 기울지<br />않은 상태를 말해요.</p>
 
 		<div class="imgbox img03"><img src="images/84/084_01_bg.png" alt="" /></div>
-		<div class="imgbox img04"><img src="images/84/084_01_bar.png" alt="" /></div>
+		<div class="imgbox img04 test1"><img src="images/84/084_01_bar.png" alt="" /></div>
 		<div class="imgbox img05"><img src="images/84/084_01_mask.png" alt="" /></div>
 		<div class="imgbox img06"><img src="images/84/084_01_block1.png" alt="" /></div>
 		<div class="imgbox img07"><img src="images/84/084_01_block2.png" alt="" /></div>
