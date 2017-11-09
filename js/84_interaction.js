@@ -24,13 +24,19 @@
 	var touchmove = GameManager.event.eventSelector("eventMove");
 	var touchend = GameManager.event.eventSelector("eventUp");
 
-    // set zoom value
-    if (parent.ZOOMVALUE == undefined) {
-		parent.ZOOMVALUE = 1;
-	}
-
-	var zoom = parent.ZOOMVALUE;
-
+    
+    var zoom;
+    function viewport(){
+        if (parent.ZOOMVALUE == undefined) {
+            parent.ZOOMVALUE = 1;
+        }
+        zoom = parent.ZOOMVALUE;
+    }
+    
+    viewport();
+    $(window).resize(function(){
+        viewport();
+    });
 
     // css selector "block"
     var sBlock = ".img_block";
@@ -63,7 +69,7 @@
         }
 
         left = left / zoom;
-        top = zoom / zoom;
+        top = top / zoom;
         
 
         
@@ -100,7 +106,7 @@
             }
 
             left = left / zoom;
-            top = zoom / zoom;
+            top = top / zoom;
 
 
             curBlock.css({left:left, top:top});
