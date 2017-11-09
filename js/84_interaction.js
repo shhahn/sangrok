@@ -61,6 +61,9 @@
             left = e.originalEvent.touches[0].pageX-20;
             top = e.originalEvent.touches[0].pageY-20;
         }
+
+        left = left / zoom;
+        top = zoom / zoom;
         
 
         
@@ -84,8 +87,6 @@
         //var left = e.pageX-10;
         //var top = e.pageY-10;
 
-
-
         if (typeof(curBlock) !== 'undefined') {
             
             console.log(e);
@@ -97,6 +98,9 @@
                 left = e.originalEvent.touches[0].pageX-20;
                 top = e.originalEvent.touches[0].pageY-20;
             }
+
+            left = left / zoom;
+            top = zoom / zoom;
 
 
             curBlock.css({left:left, top:top});
