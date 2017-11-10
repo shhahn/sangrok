@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ko" xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+	<meta charset="UTF-8"/>
+	<title>lesson1</title>
+	<meta name="viewport" content="width=768,height=1024,initial-scale=1.0, user-scalable=no, maximum-scale=1.0" />
+	<meta name="format-detection" content="telephone=no"/>
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+	<link rel="stylesheet" type="text/css" href="css/keris.css" />
+	<link rel="stylesheet" type="text/css" href="css/mediaControl.css" />
+	<link rel="stylesheet" type="text/css" href="css/87.css" />
+	<script src="js/DTCaliperSensor.js"></script>
+	<script src="js/jquery-1.11.0.min.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/87.js"></script>
+
+	<script src="js/video_popup.js"></script>
+	<script src="js/87_video_play.js"></script>
+</head>
+<body>
+<div class="wrap"><!--[[ wrap Start ]]-->
+	<div class="container odd_container"><!--[[ container Start ]]-->
+		
+		<div class="txtCont_wrap">
+
+			<ol>
+				<li class="bullet_cb bul02">양팔저울의 한쪽 저울 접시에 측정하려는 물체를 올려놓습니다.</li>
+				<li class="bullet_cb bul03">저울대가 수평을 잡을 때까지 다른 한쪽 저울 접시에 추를 올려놓습니다.</li>
+				<li class="bullet_cb bul04">저울대가 수평을 잡았을 때 추의 총 무게를 계산합니다.</li>
+				<li class="bullet_cb bul05">물체를 바꾸어 <span class="bul_num">2</span>~<span class="bul_num">4</span>의 활동을 한 다음, 측정한 물체의 무게를 비교합니다.</li>
+			</ol>
+
+			<ol>
+				<li class="bullet_cb bul01">추와 같은 역할을 할 수 있는 물체를 생각해 볼까요?</li>
+			</ol>
+			
+			<div class="txtbox txt01">
+				<p class="sentence">양팔저울로 여러 가지 물체의 무게를 직접 비교하기 위해서는 양팔 저울의 받침점으로부터 같은 거리에 있는 저울 접시에 물체를 각각 올려 놓고 어느 쪽으로 기울어졌는지 확인하는 방법이 있습니다. 그리고 양팔저울의 받침점으로부터 같은 거리에 있는 한쪽 저울 접시에 물체를 올려놓은 다음, 다른 한쪽 저울 접시에 무게를 알고 있는 추 등의 물체를 올려놓고 무게를 측정해 비교하는 방법도 있습니다.</p>
+			</div>
+			
+			<!-- <p class="bubble b01">추</p>			 -->
+			<p class="bubble b02">풀은 가위보다<br />무겁고, 가위는<br />지우개보다 무거워요.</p>
+			<p class="bubble b03">풀</p>
+			<p class="bubble b04">가위</p>
+			<p class="bubble b05">가위</p>
+			<p class="bubble b06">지우개</p>
+			<p class="bubble b07">▲ 세 가지 물체의 무게를 직접 비교하는 방법</p>
+			
+			<div class="topbox typeC">
+				<p class="top_title">해결</p>
+			</div>
+
+			<div class="page_num"><span>87</span></div>
+		
+			<div class="imgbox_wrap_02">	
+				<div class="img01"></div>			
+				<div class="img02"></div>
+				<div class="img03"></div>
+				<div class="img04"></div>
+				<div class="img05"></div>
+				<div class="img06"></div>
+			</div>
+		</div>
+		
+		<!--[[ 버튼 시작 ]]-->
+		<div class="btn_wrap">
+			<div class="btn btnView">실험관찰</div>
+			<div class="btn btnView">실험관찰</div>
+			<div class="btn btnReset">
+				<div class="ico">초기화</div>
+				<p class="txt none" title="초기화">초기화</p>
+			</div>
+			<div class="btn btnStudy">
+				<div class="ico">보충심화</div>
+				<p class="txt dtext_cls_video" title="보충심화 제목">세 물체의 무게 비교</p>
+			</div>
+			<div class="btn btnPlay">실행</div>
+		</div>
+		<!--[[ 버튼 끝 ]]-->
+
+		<div class="imgbox img01"></div>
+		<div class="imgbox img02"></div>
+		<div class="imgbox img03"></div>
+		<div class="imgbox img04"></div>
+		<div class="imgbox img05"></div>
+		<div class="imgbox img06"></div>
+		<div class="imgbox img07"></div>
+		<div class="imgbox img08"></div>
+		<div class="imgbox img09"></div>
+		<div class="imgbox img10"></div>
+		<div class="imgbox img11"></div>
+		
+		<div class="finger"><span>☞ 추를 위쪽 접시에 올려 놓아 보세요.</span></div>
+
+	</div><!--[[ container End ]]-->
+</div><!--[[ wrap End ]]-->
+
+<div class="zoom_img_wrap a"><!--[[ video 레이어 시작 ]]-->
+	<div id="vwrap">
+		<div class="pageContainer">
+			<div class="page_1">
+				<div class="videoWrap"></div>
+			</div>
+			<div class="txt">* 동영상의 대표 이미지를 poster로 지정해야 함</div>
+		</div>
+		<div class="vclose"><img src="images/common/btn_stop.png" alt="닫기"/></div>
+	</div>
+</div><!--[[ video 레이어 끝 ]]-->
+
+<div class="layer_wrap view"><!--[[ 레이어팝업 시작 : view 실험관찰 ]]-->
+	<div class="layer_head">
+		<div class="layer_title"><span>양팔저울로 물체의 무게 비교하기</span></div>
+		<div class="layer_close" role="button"></div>
+	</div>
+	<div class="layer_body">
+		<div class="layer_contents">
+			<ul class="sub_title">
+				<li class="tit tit01"></li>
+				<li class="tabs">
+					<span class="on"></span>
+					<span class=""></span>
+				</li>
+			</ul>
+			<ul  class="tab_layer">
+				<li class="layer_tab_01"><!--[[ 첫번째 Tab ]]-->
+
+					<div class="page_title bul01">양팔저울의 사용 방법에 주의하면서 여러 가지 물체의 무게를 측정해 봅시다.</div>
+
+				</li>
+				<li class="layer_tab_02"><!--[[ 두번째 Tab ]]-->
+
+					<div class="page_title bul02">가장 무거운 물체부터 순서대로 써 봅시다.</div>
+					<textarea></textarea>
+
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="layer_foot"></div>
+</div><!--[[ 레이어팝업 끝 : view 실험관찰 ]]-->
+
+<div class="layer_wrap study"><!--[[ 레이어팝업 시작 : study 보충심화 ]]-->
+	<div class="layer_head">
+		<div class="layer_title"><span>세 물체의 무게 비교</span></div>
+		<div class="layer_close" role="button"></div>
+	</div>
+	<div class="layer_body">
+		<div class="layer_contents">
+			<ul  class="tab_layer">
+				<li class="layer_tab_01"><!--[[ 첫번째 Tab ]]-->
+
+					<div class="page_title bul01">무게를 알 수 없는 세 물체 A, B, C가 있습니다. 수평 잡기의 원리를 이용하여 실험해 보고 세 물체를 무게가 가장 무거운 순서대로 나열해 보세요.</div>
+					<div class="page_contents"></div>
+
+					<div class="imgbox img12"></div>
+					<div class="imgbox img13"></div>
+					<div class="imgbox img14"></div>
+					<div class="imgbox img15"></div>
+					<div class="imgbox img16"></div>
+					<div class="imgbox img17"></div>
+					<div class="imgbox img18"></div>
+					<div class="imgbox img19"></div>
+					<div class="imgbox img20"></div>
+
+					<div class="box_wrap">
+						<div class="box01"></div>
+						<div class="box02"></div>
+						<div class="box03"></div>
+						<div class="box04"></div>
+						<div class="box05"></div>
+					</div>
+
+					<div class="btnText">확인하기</div>
+
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="layer_foot"></div>
+</div><!--[[ 레이어팝업 끝 : study 보충심화 ]]-->
+
+</body>
+</html>

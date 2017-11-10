@@ -17,7 +17,7 @@
 .finger2 span{line-height:19px;} */
 
 /*textarea 크기 조절*/
-.view .layer_body .tab_layer textarea{height:120px;}
+.view .layer_body .tab_layer textarea{margin-top:354px;height:120px;}
 
 /* 본문 */
 .txtbox.txt01{width:471px;top:62px;left:109px;}
@@ -34,5 +34,20 @@
 .imgbox.img03 img{width:290px;height:100px;}
 
 .bullet_cb.bul01{top:877px;left:108px;width:311px;letter-spacing:-1.2px;}
+
+/*실험관찰*/
+.imgbox.img04{position:absolute;top:395px;left:173px;}
+.imgbox.img04 img{width:415px;height:26px;}
+.imgbox.img05{position:absolute;top:412px;left:351px;}
+.imgbox.img05 img{width:60px;height:43px;}
+.imgbox.img06{position:absolute;top:447px;left:172px;}
+.imgbox.img06 img{width:50px;height:71px;}
+.imgbox.img07{position:absolute;top:449px;left:552px;}
+.imgbox.img07 img{width:35px;height:71px;}
+
+
+/*손가락 모양 지시문*/
+.finger{position:absolute;top:535px;left:263px;width:247px;height:19px;color:#ee8f14;}
+.finger span{line-height:19px;}
 
     
