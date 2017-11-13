@@ -152,6 +152,8 @@
                 } else {
                     curBlock.css({left:boxBinder.left, top:top});
                     curBlock.data("weight", weight);
+                    curBlock.data("left", boxBinder.left);
+                    curBlock.data("top", top);
                     arrBlock[boxBinder.index] = curBlock;
 
                     // 어디가 무거운지 판정
@@ -229,26 +231,91 @@
         if (arrBlock[10]) right_weight += arrBlock[10].data("weight") * 5
 
 
+        var deg;
         if (left_weight < right_weight) {
-            seesaw_deg = 5;
+            deg = 5;
         } else if (left_weight > right_weight) {
-            seesaw_deg = -5;
+            deg = -5;
         } else {
-            seesaw_deg = 0;
+            deg = 0;
         }
 
-        $(".img04").rotate({
-            angle: 0,
-            animateTo:seesaw_deg,
-            easing : function(x, t, b, c, d) { 
-                //console.log("easing");
-                return b+(t/d)*c ; 
-            }
-        });
+        animate(deg);
 
         //console.log(left_weight);
         //console.log(right_weight);
 
+    }
+
+
+    /**
+     * animation
+     */
+    function animate(deg) {
+
+        if (deg != seesaw_deg) {
+            seesaw_deg = deg;
+            
+            $(".img04").rotate({
+                angle: 0,
+                animateTo:seesaw_deg,
+                easing : function(x, t, b, c, d) { 
+                    //console.log("easing");
+                    return b+(t/d)*c ; 
+                }
+            });
+
+
+            function correct(block, level, deg) {
+                //var left = block.data("left");
+
+                if (!block) return;
+
+                var top = block.data("top");
+
+               
+                if (deg < 0) {
+                    
+
+                    //console.log(top);
+                    top -= level;
+                } else if (deg > 0) {
+                    top += level;
+                } else {
+
+                }
+
+                
+                block.css({top:top});
+            }
+
+            
+            var step = -15.5;
+            for (var i = 0; i < 11; i++) {
+                correct(arrBlock[i], step, deg);
+
+                step += 3.0;
+            }
+            
+            /*
+            if (arrBlock[0]) left_weight += arrBlock[0].data("weight") * 5
+            if (arrBlock[1]) left_weight += arrBlock[1].data("weight") * 4
+            if (arrBlock[2]) left_weight += arrBlock[2].data("weight") * 3
+            if (arrBlock[3]) left_weight += arrBlock[3].data("weight") * 2
+            if (arrBlock[4]) left_weight += arrBlock[4].data("weight") * 1
+    
+            if (arrBlock[6]) right_weight += arrBlock[6].data("weight") * 1
+            if (arrBlock[7]) right_weight += arrBlock[7].data("weight") * 2
+            if (arrBlock[8]) right_weight += arrBlock[8].data("weight") * 3
+            if (arrBlock[9]) right_weight += arrBlock[9].data("weight") * 4
+            if (arrBlock[10]) right_weight += arrBlock[10].data("weight") * 5
+
+            */
+        }
+
+
+
+        
     }
 
 
