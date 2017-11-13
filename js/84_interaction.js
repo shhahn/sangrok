@@ -253,6 +253,30 @@
      */
     function animate(deg) {
 
+        function correct(block, level, deg) {
+            //var left = block.data("left");
+
+            if (!block) return;
+
+            var top = block.data("top");
+
+           
+            if (deg < 0) {
+                
+
+                //console.log(top);
+                top -= level;
+            } else if (deg > 0) {
+                top += level;
+            } else {
+
+            }
+
+            
+            block.css({top:top});
+        }
+
+
         if (deg != seesaw_deg) {
             seesaw_deg = deg;
             
@@ -265,57 +289,34 @@
                 }
             });
 
-
-            function correct(block, level, deg) {
-                //var left = block.data("left");
-
-                if (!block) return;
-
-                var top = block.data("top");
-
-               
-                if (deg < 0) {
-                    
-
-                    //console.log(top);
-                    top -= level;
-                } else if (deg > 0) {
-                    top += level;
-                } else {
-
-                }
-
-                
-                block.css({top:top});
-            }
-
             
-            var step = -15.5;
-            for (var i = 0; i < 11; i++) {
-                correct(arrBlock[i], step, deg);
-
-                step += 3.0;
-            }
-            
-            /*
-            if (arrBlock[0]) left_weight += arrBlock[0].data("weight") * 5
-            if (arrBlock[1]) left_weight += arrBlock[1].data("weight") * 4
-            if (arrBlock[2]) left_weight += arrBlock[2].data("weight") * 3
-            if (arrBlock[3]) left_weight += arrBlock[3].data("weight") * 2
-            if (arrBlock[4]) left_weight += arrBlock[4].data("weight") * 1
-    
-            if (arrBlock[6]) right_weight += arrBlock[6].data("weight") * 1
-            if (arrBlock[7]) right_weight += arrBlock[7].data("weight") * 2
-            if (arrBlock[8]) right_weight += arrBlock[8].data("weight") * 3
-            if (arrBlock[9]) right_weight += arrBlock[9].data("weight") * 4
-            if (arrBlock[10]) right_weight += arrBlock[10].data("weight") * 5
-
-            */
         }
 
+        var step = -15.5/zoom;
+        for (var i = 0; i < 11; i++) {
+            correct(arrBlock[i], step, deg);
+
+            step += 3.0/zoom;
+        }
+   
+    }
 
 
+    /**
+     * reset
+     */
+    function reset() {
         
+        for (var i = 0; i < 11; i++) {
+            if (arrBlock[i]) {
+                arrBlock[i].remove();
+                arrBlock[i] = undefined;
+            }
+        }
+
+        seesaw_deg = 0;
+        $(".img04").rotate(seesaw_deg);
+
     }
 
 
@@ -327,6 +328,9 @@
 
         $(sBlock).on(touchstart, onTouchStartBlock);
         $(sContainer).on(touchmove, onTouchMoveContainer);
+
+        $(".btnReset").on(touchstart,reset);
+
         if (GameManager.event.isTouchDevice) {
             console.log("ASdfsadfsd");
             $(sContainer).on(touchend, onTouchEndContainer);    
