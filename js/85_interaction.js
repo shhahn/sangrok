@@ -25,7 +25,14 @@
     var pos_btn1_top_inner = 310 / zoom;
     var pos_btn1_middle = 330 / zoom;
     var pos_btn1_bottom_inner = 345 / zoom;
-    var pos_btn1_bottom_outter = 355 / zoom;
+    var pos_btn1_bottom_outer = 355 / zoom;
+
+
+    var pos_btn3_top_outer = 530 / zoom;
+    var pos_btn3_top_inner = 535 / zoom;
+    var pos_btn3_middle = 555 / zoom;
+    var pos_btn3_bottom_inner = 570 / zoom;
+    var pos_btn3_bottom_outer = 575 / zoom;
 
     /**
      * 같은 몸무게 이미지
@@ -102,6 +109,73 @@
 
     }
 
+
+
+
+    function onClickBtn3(e) {
+        
+            var img = $(".img02").find("img");
+            var curImgSrc = img.attr("src");
+    
+            switch (curImgSrc) {
+                case "images/85/b85_02_01.png": 
+                    img.attr("src", "images/85/b85_02_02.png"); 
+                    btn3.css({left:pos_btnleft_outer, top:pos_btn3_top_outer}); 
+                    btn4.css({top:pos_btn3_bottom_outer}); 
+                    break;
+                case "images/85/b85_02_02.png":
+                    img.attr("src", "images/85/b85_02_01.png");
+                    btn3.css({left:pos_btnleft_inner, top:pos_btn3_middle}); 
+                    btn4.css({top:pos_btn3_middle}); 
+                    break;
+                case "images/85/b85_02_03.png":
+                    img.attr("src", "images/85/b85_02_04.png");
+                    btn3.css({left:pos_btnleft_inner, top:pos_btn3_top_inner}); 
+                    //btn4.css({top:pos_btn1_middle}); 
+                    break;
+                case "images/85/b85_02_04.png":
+                    img.attr("src", "images/85/b85_02_03.png");
+                    btn3.css({left:pos_btnleft_outer, top:pos_btn3_top_outer}); 
+                    //btn4.css({top:pos_btn3_top_outer}); 
+                    break;
+            }
+    
+            
+        }
+    
+        function onClickBtn4() {
+    
+            var img = $(".img02").find("img");
+            var curImgSrc = img.attr("src");
+    
+            switch (curImgSrc) {
+                case "images/85/b85_02_01.png": 
+                    img.attr("src", "images/85/b85_02_04.png"); 
+                    btn4.css({left:pos_btnright_inner, top:pos_btn3_bottom_inner}); 
+                    btn3.css({top:pos_btn3_top_inner}); 
+                    break;
+                case "images/85/b85_02_02.png":
+                    img.attr("src", "images/85/b85_02_03.png");
+                    btn4.css({left:pos_btnright_inner, top:pos_btn3_bottom_inner}); 
+                    //btn1.css({top:pos_btn1_middle}); 
+                    break;
+                case "images/85/b85_02_03.png":
+                    img.attr("src", "images/85/b85_02_02.png");
+                    btn4.css({left:pos_btnright_outer, top:pos_btn3_bottom_outer}); 
+                    //btn1.css({top:pos_btn1_middle}); 
+                    break;
+                case "images/85/b85_02_04.png":
+                    img.attr("src", "images/85/b85_02_01.png");
+                    btn4.css({left:pos_btnright_outer, top:pos_btn3_middle}); 
+                    btn3.css({top:pos_btn3_middle}); 
+                    break;
+            }
+    
+        }
+
+
+
+
     var btn1;
     var btn2;
     var btn3;
@@ -118,11 +192,17 @@
         btn1.on("click", onClickBtn1);
         btn2.on("click", onClickBtn2);
 
+        btn3.on("click", onClickBtn3);
+        btn4.on("click", onClickBtn4);
+
 
         btn1.css({left:pos_btnleft_inner, top:pos_btn1_middle});
         btn2.css({left:pos_btnright_inner, top:pos_btn1_middle});
 
-        $(".img01").on("click", function(e) {
+        btn3.css({left:pos_btnleft_inner, top:pos_btn3_middle});
+        btn4.css({left:pos_btnright_outer, top:pos_btn3_middle});
+
+        $(".img02").on("click", function(e) {
             console.log(e);
         });
 
