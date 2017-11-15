@@ -10,6 +10,28 @@
 .btn:nth-child(5){top:899px;left:327px;} /*실험관찰*/
 
 
+
+/*
+    .btn-dummy:nth-child(1){top:330px;left:246px;}
+    pos_btnleft_outer = btn1Left - 70 * zoom;
+    pos_btnleft_inner = btn1Left;
+    pos_btnright_inner = btn1Left + 190 * zoom;
+    pos_btnright_outer = btn1Left + 250 * zoom;
+
+    pos_btn1_top_outer = btn1Top - 25 * zoom;
+    pos_btn1_top_inner = btn1Top - 20 * zoom;
+    pos_btn1_middle = btn1Top;
+    pos_btn1_bottom_inner = btn1Top + 15 * zoom;
+    pos_btn1_bottom_outer = btn1Top + 25 * zoom;
+
+    pos_btn3_top_outer = btn3Top - 25 * zoom;
+    pos_btn3_top_inner = btn3Top - 20 * zoom;
+    pos_btn3_middle = btn3Top;
+    pos_btn3_bottom_inner = btn3Top + 15 * zoom;
+    pos_btn3_bottom_outer = btn3Top + 25 * zoom;
+*/
+
+
 /*손가락 모양 지시문*/
 /* .finger{position:absolute;top:195px;left:250px;width:173px;height:19px;color:#ee8f14;}
 .finger span{line-height:19px;}

@@ -51,21 +51,44 @@
 
     var seesaw_deg = 0; // 시소 기울기
 
+
+    var touchOffsetLeft = 0;
+    var touchOffsetTop = 0;
+
     /**
      * get touch position 
      */
-    function getPos(e) {
-        var left = e.pageX-10;
-        var top = e.pageY-10;
+    function getPos(e, box) {
+
+        //pos.left-box.offset().left/zoom
+
+        
+
+
+        var left = e.pageX;
+        var top = e.pageY;
 
         
         if (typeof(e.pageX) === 'undefined') {
-            left = e.originalEvent.changedTouches[0].pageX-20;
-            top = e.originalEvent.changedTouches[0].pageY-20;
+            left = e.originalEvent.changedTouches[0].pageX;
+            top = e.originalEvent.changedTouches[0].pageY;
         }
+
 
         left = left / zoom;
         top = top / zoom;
+
+        if (typeof(box) !== 'undefined') {
+            touchOffsetTop = top - box.offset().top/zoom;
+            touchOffsetLeft = left - box.offset().left/zoom;
+        }
+ 
+
+        left = left / zoom - touchOffsetLeft;
+        top = top / zoom - touchOffsetTop;
+
+        console.log(touchOffsetLeft);
+        console.log(left);
 
         return {
             left : left,
@@ -80,13 +103,25 @@
 
         //console.log(e.originalEvent.touches[0].pageX);
 
-        var clone = $(this).clone();
+        // var clone = $(this).clone();
+
+        // clone 아님...
+        var clone = $(this);
 
         //var left = $(this).offset().left;
         //var top = $(this).offset().top;
 
         
-        var pos = getPos(e);
+        
+        //touchOffsetTop = clone.offset().top/zoom;
+        //touchOffsetLeft = clone.offset().left/zoom;
+
+        var pos = getPos(e, clone);
+
+
+        //alert(clone.offset().left/zoom);
+        //alert(pos.left);
+        //alert(pos.left-clone.offset().left/zoom);
 
 
         clone.css({left:pos.left, top:pos.top});
@@ -136,7 +171,7 @@
             
             // 영역밖에 놓으면 지움
             if (typeof(boxBinder) === 'undefined') {
-                curBlock.remove();
+                //curBlock.remove();
             } else {
 
                 var top = 750;

@@ -13,26 +13,48 @@
     viewport();
     $(window).resize(function(){
         viewport();
+        setpos();
     });
 
 
-    var pos_btnleft_outer = 180 / zoom;
-    var pos_btnleft_inner = 240 / zoom;
-    var pos_btnright_inner = 430 / zoom;
-    var pos_btnright_outer = 490 / zoom;
 
-    var pos_btn1_top_outer = 305 / zoom;
-    var pos_btn1_top_inner = 310 / zoom;
+    /*
+    var pos_btnleft_outer = 180 * zoom;
+    var pos_btnleft_inner = 240 * zoom;
+    var pos_btnright_inner = 430 * zoom;
+    var pos_btnright_outer = 490 * zoom;
+
+    var pos_btn1_top_outer = 305 * zoom;
+    var pos_btn1_top_inner = 310 * zoom;
     var pos_btn1_middle = 330 / zoom;
-    var pos_btn1_bottom_inner = 345 / zoom;
-    var pos_btn1_bottom_outer = 355 / zoom;
+    var pos_btn1_bottom_inner = 345 * zoom;
+    var pos_btn1_bottom_outer = 355 * zoom;
+
+    var pos_btn3_top_outer = 530 * zoom;
+    var pos_btn3_top_inner = 535 * zoom;
+    var pos_btn3_middle = 555 * zoom;
+    var pos_btn3_bottom_inner = 570 * zoom;
+    var pos_btn3_bottom_outer = 575 * zoom;
+    */
 
 
-    var pos_btn3_top_outer = 530 / zoom;
-    var pos_btn3_top_inner = 535 / zoom;
-    var pos_btn3_middle = 555 / zoom;
-    var pos_btn3_bottom_inner = 570 / zoom;
-    var pos_btn3_bottom_outer = 575 / zoom;
+    var pos_btnleft_outer = 0;
+    var pos_btnleft_inner = 0;
+    var pos_btnright_inner = 0;
+    var pos_btnright_outer = 0;
+
+    var pos_btn1_top_outer = 0;
+    var pos_btn1_top_inner = 0;
+    var pos_btn1_middle = 0;
+    var pos_btn1_bottom_inner = 0;
+    var pos_btn1_bottom_outer = 0;
+
+    var pos_btn3_top_outer = 0;
+    var pos_btn3_top_inner = 0;
+    var pos_btn3_middle = 0;
+    var pos_btn3_bottom_inner = 0;
+    var pos_btn3_bottom_outer = 0;
+
 
     /**
      * 같은 몸무게 이미지
@@ -53,26 +75,29 @@
         var img = $(".img01").find("img");
         var curImgSrc = img.attr("src");
 
+        console.log(e);
+
+
         switch (curImgSrc) {
             case "images/85/b85_01_01.png": 
                 img.attr("src", "images/85/b85_01_03.png"); 
-                btn1.css({left:pos_btnleft_outer, top:pos_btn1_top_outer}); 
-                btn2.css({top:pos_btn1_bottom_inner}); 
+                btn1.offset({left:pos_btnleft_outer, top:pos_btn1_top_outer}); 
+                btn2.offset({top:pos_btn1_bottom_inner}); 
                 break;
             case "images/85/b85_01_02.png":
                 img.attr("src", "images/85/b85_01_04.png");
-                btn1.css({left:pos_btnleft_outer, top:pos_btn1_middle}); 
-                btn2.css({top:pos_btn1_middle}); 
+                btn1.offset({left:pos_btnleft_outer, top:pos_btn1_middle}); 
+                btn2.offset({top:pos_btn1_middle}); 
                 break;
             case "images/85/b85_01_03.png":
                 img.attr("src", "images/85/b85_01_01.png");
-                btn1.css({left:pos_btnleft_inner, top:pos_btn1_middle}); 
-                btn2.css({top:pos_btn1_middle}); 
+                btn1.offset({left:pos_btnleft_inner, top:pos_btn1_middle}); 
+                btn2.offset({top:pos_btn1_middle}); 
                 break;
             case "images/85/b85_01_04.png":
                 img.attr("src", "images/85/b85_01_02.png");
-                btn1.css({left:pos_btnleft_inner, top:pos_btn1_bottom_inner}); 
-                btn2.css({top:pos_btn1_top_outer}); 
+                btn1.offset({left:pos_btnleft_inner, top:pos_btn1_bottom_inner}); 
+                btn2.offset({top:pos_btn1_top_outer}); 
                 break;
         }
 
@@ -87,23 +112,23 @@
         switch (curImgSrc) {
             case "images/85/b85_01_01.png": 
                 img.attr("src", "images/85/b85_01_02.png"); 
-                btn2.css({left:pos_btnright_outer, top:pos_btn1_top_outer}); 
-                btn1.css({top:pos_btn1_bottom_inner}); 
+                btn2.offset({left:pos_btnright_outer, top:pos_btn1_top_outer}); 
+                btn1.offset({top:pos_btn1_bottom_inner}); 
                 break;
             case "images/85/b85_01_02.png":
                 img.attr("src", "images/85/b85_01_01.png");
-                btn2.css({left:pos_btnright_inner, top:pos_btn1_middle}); 
-                btn1.css({top:pos_btn1_middle}); 
+                btn2.offset({left:pos_btnright_inner, top:pos_btn1_middle}); 
+                btn1.offset({top:pos_btn1_middle}); 
                 break;
             case "images/85/b85_01_03.png":
                 img.attr("src", "images/85/b85_01_04.png");
-                btn2.css({left:pos_btnright_outer, top:pos_btn1_middle}); 
-                btn1.css({top:pos_btn1_middle}); 
+                btn2.offset({left:pos_btnright_outer, top:pos_btn1_middle}); 
+                btn1.offset({top:pos_btn1_middle}); 
                 break;
             case "images/85/b85_01_04.png":
                 img.attr("src", "images/85/b85_01_03.png");
-                btn2.css({left:pos_btnright_inner, top:pos_btn1_bottom_inner}); 
-                btn1.css({top:pos_btn1_top_outer}); 
+                btn2.offset({left:pos_btnright_inner, top:pos_btn1_bottom_inner}); 
+                btn1.offset({top:pos_btn1_top_outer}); 
                 break;
         }
 
@@ -113,65 +138,65 @@
 
 
     function onClickBtn3(e) {
+
+        var img = $(".img02").find("img");
+        var curImgSrc = img.attr("src");
+
+        switch (curImgSrc) {
+            case "images/85/b85_02_01.png": 
+                img.attr("src", "images/85/b85_02_02.png"); 
+                btn3.offset({left:pos_btnleft_outer, top:pos_btn3_top_outer}); 
+                btn4.offset({top:pos_btn3_bottom_outer}); 
+                break;
+            case "images/85/b85_02_02.png":
+                img.attr("src", "images/85/b85_02_01.png");
+                btn3.offset({left:pos_btnleft_inner, top:pos_btn3_middle}); 
+                btn4.offset({top:pos_btn3_middle}); 
+                break;
+            case "images/85/b85_02_03.png":
+                img.attr("src", "images/85/b85_02_04.png");
+                btn3.offset({left:pos_btnleft_inner, top:pos_btn3_top_inner}); 
+                //btn4.css({top:pos_btn1_middle}); 
+                break;
+            case "images/85/b85_02_04.png":
+                img.attr("src", "images/85/b85_02_03.png");
+                btn3.offset({left:pos_btnleft_outer, top:pos_btn3_top_outer}); 
+                //btn4.css({top:pos_btn3_top_outer}); 
+                break;
+        }
+
         
-            var img = $(".img02").find("img");
-            var curImgSrc = img.attr("src");
+    }
     
-            switch (curImgSrc) {
-                case "images/85/b85_02_01.png": 
-                    img.attr("src", "images/85/b85_02_02.png"); 
-                    btn3.css({left:pos_btnleft_outer, top:pos_btn3_top_outer}); 
-                    btn4.css({top:pos_btn3_bottom_outer}); 
-                    break;
-                case "images/85/b85_02_02.png":
-                    img.attr("src", "images/85/b85_02_01.png");
-                    btn3.css({left:pos_btnleft_inner, top:pos_btn3_middle}); 
-                    btn4.css({top:pos_btn3_middle}); 
-                    break;
-                case "images/85/b85_02_03.png":
-                    img.attr("src", "images/85/b85_02_04.png");
-                    btn3.css({left:pos_btnleft_inner, top:pos_btn3_top_inner}); 
-                    //btn4.css({top:pos_btn1_middle}); 
-                    break;
-                case "images/85/b85_02_04.png":
-                    img.attr("src", "images/85/b85_02_03.png");
-                    btn3.css({left:pos_btnleft_outer, top:pos_btn3_top_outer}); 
-                    //btn4.css({top:pos_btn3_top_outer}); 
-                    break;
-            }
-    
-            
+    function onClickBtn4() {
+
+        var img = $(".img02").find("img");
+        var curImgSrc = img.attr("src");
+
+        switch (curImgSrc) {
+            case "images/85/b85_02_01.png": 
+                img.attr("src", "images/85/b85_02_04.png"); 
+                btn4.offset({left:pos_btnright_inner, top:pos_btn3_bottom_inner}); 
+                btn3.offset({top:pos_btn3_top_inner}); 
+                break;
+            case "images/85/b85_02_02.png":
+                img.attr("src", "images/85/b85_02_03.png");
+                btn4.offset({left:pos_btnright_inner, top:pos_btn3_bottom_inner}); 
+                //btn1.css({top:pos_btn1_middle}); 
+                break;
+            case "images/85/b85_02_03.png":
+                img.attr("src", "images/85/b85_02_02.png");
+                btn4.offset({left:pos_btnright_outer, top:pos_btn3_bottom_outer}); 
+                //btn1.css({top:pos_btn1_middle}); 
+                break;
+            case "images/85/b85_02_04.png":
+                img.attr("src", "images/85/b85_02_01.png");
+                btn4.offset({left:pos_btnright_outer, top:pos_btn3_middle}); 
+                btn3.offset({top:pos_btn3_middle}); 
+                break;
         }
-    
-        function onClickBtn4() {
-    
-            var img = $(".img02").find("img");
-            var curImgSrc = img.attr("src");
-    
-            switch (curImgSrc) {
-                case "images/85/b85_02_01.png": 
-                    img.attr("src", "images/85/b85_02_04.png"); 
-                    btn4.css({left:pos_btnright_inner, top:pos_btn3_bottom_inner}); 
-                    btn3.css({top:pos_btn3_top_inner}); 
-                    break;
-                case "images/85/b85_02_02.png":
-                    img.attr("src", "images/85/b85_02_03.png");
-                    btn4.css({left:pos_btnright_inner, top:pos_btn3_bottom_inner}); 
-                    //btn1.css({top:pos_btn1_middle}); 
-                    break;
-                case "images/85/b85_02_03.png":
-                    img.attr("src", "images/85/b85_02_02.png");
-                    btn4.css({left:pos_btnright_outer, top:pos_btn3_bottom_outer}); 
-                    //btn1.css({top:pos_btn1_middle}); 
-                    break;
-                case "images/85/b85_02_04.png":
-                    img.attr("src", "images/85/b85_02_01.png");
-                    btn4.css({left:pos_btnright_outer, top:pos_btn3_middle}); 
-                    btn3.css({top:pos_btn3_middle}); 
-                    break;
-            }
-    
-        }
+
+    }
 
 
 
@@ -180,6 +205,39 @@
     var btn2;
     var btn3;
     var btn4;
+
+
+    function setpos() {
+        var btn1Left = 246 * zoom; // btn1.offset().left; //240
+        var btn1Top = 330 * zoom; //btn1.offset().top; // 330
+        var btn3Top = 554 * zoom; // btn3.offset().top; // 555
+
+        
+        
+        pos_btnleft_outer = btn1Left - 70 * zoom;
+        pos_btnleft_inner = btn1Left;
+        pos_btnright_inner = btn1Left + 180 * zoom;
+        pos_btnright_outer = btn1Left + 250 * zoom;
+    
+        pos_btn1_top_outer = btn1Top - 25 * zoom;
+        pos_btn1_top_inner = btn1Top - 20 * zoom;
+        pos_btn1_middle = btn1Top;
+        pos_btn1_bottom_inner = btn1Top + 15 * zoom;
+        pos_btn1_bottom_outer = btn1Top + 25 * zoom;
+
+        pos_btn3_top_outer = btn3Top - 25 * zoom;
+        pos_btn3_top_inner = btn3Top - 20 * zoom;
+        pos_btn3_middle = btn3Top;
+        pos_btn3_bottom_inner = btn3Top + 15 * zoom;
+        pos_btn3_bottom_outer = btn3Top + 25 * zoom;
+
+
+
+        //alert("zoom " + zoom);
+        //alert("btn1Left " + btn1Left);
+        //alert("btn1Top " + btn1Top);
+        //alert("pos_btnleft_outer " + pos_btnleft_outer);
+    }
 
     $(function(){
 
@@ -195,13 +253,39 @@
         btn3.on("click", onClickBtn3);
         btn4.on("click", onClickBtn4);
 
+        console.log(btn1);
 
+        setpos();
+
+        //var btn1Left = btn1[0].offsetLeft; //240
+        //var btn1Top = btn1[0].offsetTop; // 330
+        //var btn3Top = btn3[0].offsetTop; // 555
+
+        
+
+        /*
+        var pos_btn1_top_outer = 305 * zoom;
+        var pos_btn1_top_inner = 310 * zoom;
+        var pos_btn1_middle = 330 / zoom;
+        var pos_btn1_bottom_inner = 345 * zoom;
+        var pos_btn1_bottom_outer = 355 * zoom;
+    
+        var pos_btn3_top_outer = 530 * zoom;
+        var pos_btn3_top_inner = 535 * zoom;
+        var pos_btn3_middle = 555 * zoom;
+        var pos_btn3_bottom_inner = 570 * zoom;
+        var pos_btn3_bottom_outer = 575 * zoom;
+        */
+
+
+
+        /*
         btn1.css({left:pos_btnleft_inner, top:pos_btn1_middle});
         btn2.css({left:pos_btnright_inner, top:pos_btn1_middle});
 
         btn3.css({left:pos_btnleft_inner, top:pos_btn3_middle});
         btn4.css({left:pos_btnright_outer, top:pos_btn3_middle});
-
+        */
         $(".img02").on("click", function(e) {
             console.log(e);
         });
