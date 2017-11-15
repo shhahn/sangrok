@@ -233,14 +233,14 @@
 
         // 195, 610, 38
 
-        var offsetX = 37.72;
-        var standardX = 195;
+        var offsetX = 37.72 / 1;
+        var standardX = 195 / 1;
         
         // 세로축 안으로 들어옴
-        if (pos.top >= 730 && pos.top <= 830) {
+        if (pos.top >= 730/1 && pos.top <= 830/1) {
 
             // 가로축 안으로 들어옴
-            if (pos.left >= 180 && pos.left <= 630) {
+            if (pos.left >= 180/1 && pos.left <= 630/1) {
                 for (var i = 0; i < 11; i++) {
                     
                     var right = standardX + ((i+1)*offsetX);
