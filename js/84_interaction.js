@@ -130,7 +130,6 @@
         
 
         curBlock = clone;
-        $("body").append(clone);
         
         
     }

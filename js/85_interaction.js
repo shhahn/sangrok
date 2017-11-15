@@ -211,6 +211,9 @@
 
 
     function setpos() {
+
+   
+
         var btn1Left = 246 * zoom; // btn1.offset().left; //240
         var btn1Top = 330 * zoom; //btn1.offset().top; // 330
         var btn3Top = 554 * zoom; // btn3.offset().top; // 555
@@ -432,6 +435,8 @@
             var pos = getPos(e, clone);
     
     
+            console.log(pos);
+            
             //alert(clone.offset().left/zoom);
             //alert(pos.left);
             //alert(pos.left-clone.offset().left/zoom);
@@ -442,7 +447,7 @@
             
     
             curBlock = clone;
-            $("body").append(clone);
+            //$("body").append(clone);
             
             
         }
@@ -743,6 +748,15 @@
          * initialize
          */
         function init() {
+
+
+/*
+.imgbox.img06{position:absolute;top:447px;left:172px;}
+.imgbox.img06 img{width:50px;height:71px;}
+.imgbox.img07{position:absolute;top:449px;left:552px;}
+.imgbox.img07 img{width:35px;height:71px;}
+*/
+
     
             // 안내문구, 확인버튼 최초 감추기
             $(".finger").hide();
