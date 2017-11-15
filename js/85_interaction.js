@@ -417,6 +417,8 @@
          */
         function onTouchStartBlock(e) {
     
+            if (!isActive) return;
+
             //console.log(e.originalEvent.touches[0].pageX);
     
             // var clone = $(this).clone();
@@ -504,7 +506,7 @@
                     backToHome();
                 } else {
     
-                    var top = 750;
+                    var top = 350;
                     var weight = 1;
                     if (curBlock.hasClass("img_block_double")) {
                         top = 725;
@@ -551,13 +553,13 @@
             // 195, 610, 38
     
             var offsetX = 37.72 / 1;
-            var standardX = 195 / 1;
+            var standardX = 170 / 1;
             
             // 세로축 안으로 들어옴
-            if (pos.top >= 730/1 && pos.top <= 830/1) {
+            if (pos.top >= 345/1 && pos.top <= 445/1) {
     
                 // 가로축 안으로 들어옴
-                if (pos.left >= 180/1 && pos.left <= 630/1) {
+                if (pos.left >= 155/1 && pos.left <= 610/1) {
                     for (var i = 0; i < 11; i++) {
                         
                         var right = standardX + ((i+1)*offsetX);
@@ -714,6 +716,8 @@
                 var orgLeft = $(objBlocks[i]).offset().left/zoom;
                 var orgTop = $(objBlocks[i]).offset().top/zoom;
     
+                console.log($(objBlocks[i]).offset());
+
                 $(objBlocks[i]).data("orgLeft", orgLeft);
                 $(objBlocks[i]).data("orgTop", orgTop);
             }
@@ -741,6 +745,7 @@
         function onClickOk() {
             $(".finger").show();
             isActive = true;
+            initBlockPos($(sBlock));
         }
 
     
@@ -801,6 +806,11 @@
             //alert("test");
             //$(".img04").rotate(-10);
             //$(".img08").draggable({ revert: true, helper: "clone" });
+
+
+            $(".layer_wrap").on(touchstart, function(e){
+                console.log(e);
+            });
     
         });
     
