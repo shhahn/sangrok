@@ -84,11 +84,11 @@
         }
  
 
-        left = left / zoom - touchOffsetLeft;
-        top = top / zoom - touchOffsetTop;
+        left = left - touchOffsetLeft;
+        top = top - touchOffsetTop;
 
-        console.log(touchOffsetLeft);
-        console.log(left);
+        //alert(touchOffsetLeft);
+        //alert(left);
 
         return {
             left : left,
@@ -159,19 +159,39 @@
     }
 
 
+
+    function backToHome() {
+        //curBlock.remove();
+        var orgLeft = curBlock.data("orgLeft");
+        var orgTop = curBlock.data("orgTop");
+        var index = curBlock.data("index");
+
+        if (typeof(index) !== 'undefined') {
+            arrBlock[index] = undefined;
+            curBlock.data("index", undefined);
+        }
+        
+        curBlock.css({left:orgLeft, top:orgTop});
+    }
+
+
     /**
      * touch end box 
      */
     function onTouchEndContainer(e) {
+
+
+        
 
         var pos = getPos(e);
         var boxBinder = checkArea(pos);
 
         if (typeof(curBlock) !== 'undefined') {
             
-            // 영역밖에 놓으면 지움
+            // 영역밖에 놓으면 원래 위치로 보내기
             if (typeof(boxBinder) === 'undefined') {
-                //curBlock.remove();
+                console.log("aaaaaa");
+                backToHome();
             } else {
 
                 var top = 750;
@@ -183,21 +203,28 @@
 
                 // 이미 올라가있는 블럭이 있으면 안올림
                 if (typeof(arrBlock[boxBinder.index]) !== 'undefined') {
-                    curBlock.remove();
+                    //curBlock.remove();
+                    backToHome();
+
                 } else {
+
+                    backToHome();
+
                     curBlock.css({left:boxBinder.left, top:top});
                     curBlock.data("weight", weight);
                     curBlock.data("left", boxBinder.left);
                     curBlock.data("top", top);
+                    curBlock.data("index", boxBinder.index);
                     arrBlock[boxBinder.index] = curBlock;
 
-                    // 어디가 무거운지 판정
-                    decision();
+                    
+                    
                 }
                 
             }
             
-
+            // 어디가 무거운지 판정
+            decision();
 
             curBlock = undefined;
         }        
@@ -344,10 +371,12 @@
         
         for (var i = 0; i < 11; i++) {
             if (arrBlock[i]) {
-                arrBlock[i].remove();
-                arrBlock[i] = undefined;
+                curBlock = arrBlock[i];
+                backToHome();
             }
         }
+
+        curBlock = undefined;
 
         seesaw_deg = 0;
         $(".img04").rotate(seesaw_deg);
@@ -361,13 +390,23 @@
      */
     function init() {
 
-        $(sBlock).on(touchstart, onTouchStartBlock);
+        var objBlocks = $(sBlock);
+
+        for (var i = 0; i < objBlocks.length; i++) {
+            var orgLeft = $(objBlocks[i]).offset().left;
+            var orgTop = $(objBlocks[i]).offset().top;
+
+            $(objBlocks[i]).data("orgLeft", orgLeft);
+            $(objBlocks[i]).data("orgTop", orgTop);
+        }
+
+        objBlocks.on(touchstart, onTouchStartBlock);
         $(sContainer).on(touchmove, onTouchMoveContainer);
 
         $(".btnReset").on(touchstart,reset);
 
         if (GameManager.event.isTouchDevice) {
-            console.log("ASdfsadfsd");
+            
             $(sContainer).on(touchend, onTouchEndContainer);    
         }
         
