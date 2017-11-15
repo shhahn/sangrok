@@ -36,6 +36,7 @@
     viewport();
     $(window).resize(function(){
         viewport();
+        initBlockPos($(sBlock));
     });
 
     // css selector "block"
@@ -125,12 +126,7 @@
 
 
         clone.css({left:pos.left, top:pos.top});
-        clone.on(touchmove, onTouchMoveContainer);
-
         
-        if (!GameManager.event.isTouchDevice) {
-            clone.on(touchend, onTouchEndContainer);
-        }
         
 
         curBlock = clone;
@@ -170,7 +166,7 @@
             arrBlock[index] = undefined;
             curBlock.data("index", undefined);
         }
-        
+     
         curBlock.css({left:orgLeft, top:orgTop});
         curBlock.rotate(0);
     }
@@ -181,9 +177,6 @@
      */
     function onTouchEndContainer(e) {
 
-
-        
-
         var pos = getPos(e);
         var boxBinder = checkArea(pos);
 
@@ -191,7 +184,6 @@
             
             // 영역밖에 놓으면 원래 위치로 보내기
             if (typeof(boxBinder) === 'undefined') {
-                console.log("aaaaaa");
                 backToHome();
             } else {
 
@@ -398,29 +390,41 @@
 
 
 
+    function initBlockPos(objBlocks) {
+        
+        
+        for (var i = 0; i < objBlocks.length; i++) {
+            var orgLeft = $(objBlocks[i]).offset().left/zoom;
+            var orgTop = $(objBlocks[i]).offset().top/zoom;
+
+            $(objBlocks[i]).data("orgLeft", orgLeft);
+            $(objBlocks[i]).data("orgTop", orgTop);
+        }
+    }
+
     /**
      * initialize
      */
     function init() {
 
         var objBlocks = $(sBlock);
-
-        for (var i = 0; i < objBlocks.length; i++) {
-            var orgLeft = $(objBlocks[i]).offset().left;
-            var orgTop = $(objBlocks[i]).offset().top;
-
-            $(objBlocks[i]).data("orgLeft", orgLeft);
-            $(objBlocks[i]).data("orgTop", orgTop);
-        }
+        initBlockPos(objBlocks);
 
         objBlocks.on(touchstart, onTouchStartBlock);
         $(sContainer).on(touchmove, onTouchMoveContainer);
 
         $(".btnReset").on(touchstart,reset);
 
+        objBlocks.on(touchmove, onTouchMoveContainer);
+        objBlocks.on(touchend, onTouchEndContainer);    
+        if (!GameManager.event.isTouchDevice) {
+            //clone.on(touchend, onTouchEndContainer);
+        }
+
+
         if (GameManager.event.isTouchDevice) {
             
-            $(sContainer).on(touchend, onTouchEndContainer);    
+            //$(sContainer).on(touchend, onTouchEndContainer);    
         }
         
         for (var i = 0; i < 11; i++) {
