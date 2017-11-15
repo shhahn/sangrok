@@ -172,6 +172,7 @@
         }
         
         curBlock.css({left:orgLeft, top:orgTop});
+        curBlock.rotate(0);
     }
 
 
@@ -315,7 +316,7 @@
      */
     function animate(deg) {
 
-        function correct(block, level, deg) {
+        function correct(block, level, deg, degDiff) {
             //var left = block.data("left");
 
             if (!block) return;
@@ -334,12 +335,17 @@
 
             }
 
+            if (degDiff) {
+                block.animate({top:top}, 1000);
+            } else {
+                block.css({top:top});
+            }
             
-            block.css({top:top});
         }
 
 
-        if (deg != seesaw_deg) {
+        var degDiff = deg != seesaw_deg;
+        if (degDiff) {
             seesaw_deg = deg;
             
             $(".img04").rotate({
@@ -351,12 +357,19 @@
                 }
             });
 
+
+            // box 돌리기
+            for (var i = 0; i < 11; i++) {
+                if (arrBlock[i]) {
+                    arrBlock[i].rotate({animateTo:seesaw_deg});
+                }
+            }
             
         }
 
         var step = -15.5/zoom;
         for (var i = 0; i < 11; i++) {
-            correct(arrBlock[i], step, deg);
+            correct(arrBlock[i], step, deg, degDiff);
 
             step += 3.0/zoom;
         }
