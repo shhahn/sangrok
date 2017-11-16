@@ -54,7 +54,7 @@
             curCardTxt.flip(true, function(){
                 curCardTxt = undefined;
             });
-        },1000);
+        },500);
         
         
 
@@ -132,8 +132,8 @@
         }
 
 
-        if (msTime <= 0) {
-            alert("실패");
+        if (msTime < 0) {
+            //alert("실패");
             doingGame = false;
             //reset();
             return;
