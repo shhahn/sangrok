@@ -124,41 +124,15 @@
          * touch block event
          */
         function onTouchStartBlock(e) {
-    
-            if (!isActive) return;
 
-            //console.log(e.originalEvent.touches[0].pageX);
-    
-            // var clone = $(this).clone();
-    
-            // clone 아님...
-            var clone = $(this);
-    
-            //var left = $(this).offset().left;
-            //var top = $(this).offset().top;
-    
-            
-            
-            //touchOffsetTop = clone.offset().top/zoom;
-            //touchOffsetLeft = clone.offset().left/zoom;
-    
-            var pos = getPos(e, clone);
-    
+            var block = $(this);
+            var pos = getPos(e, block);
     
             console.log(pos);
+
+            block.css({left:pos.left, top:pos.top});
             
-            //alert(clone.offset().left/zoom);
-            //alert(pos.left);
-            //alert(pos.left-clone.offset().left/zoom);
-    
-    
-            clone.css({left:pos.left, top:pos.top});
-            
-            
-    
-            curBlock = clone;
-            //$("body").append(clone);
-            
+            curBlock = block;
             
         }
     
@@ -195,7 +169,6 @@
             }
          
             curBlock.css({left:orgLeft, top:orgTop});
-            curBlock.rotate(0);
         }
     
     
@@ -214,32 +187,67 @@
                     backToHome();
                 } else {
     
-                    var top = 350;
-                    var weight = 1;
-                    if (curBlock.hasClass("img_block_double")) {
-                        top = 725;
-                        weight = 2;
+                    //backToHome();
+
+                    var i;
+                    var left;
+                    var top;
+                    var weight;
+
+                    if (curBlock.hasClass("img_block_small")) {
+
+                        for (i=0; i < 3; i++) {
+                            if (typeof(arrBlock[i]) == 'undefined') {
+                                break;
+                            }
+                        }
+
+                        left = boxBinder.left + 10;
+                        top = (boxBinder.bottom - 10) - ((curBlock.height()-1) * (i+1));
+                        weight = wSblock;
+
+                    } else if (curBlock.hasClass("img_block_mid")) {
+
+                        for (i=3; i < 5; i++) {
+                            if (typeof(arrBlock[i]) == 'undefined') {
+                                break;
+                            }
+                        }
+
+                        left = boxBinder.left + 25;
+                        top = (boxBinder.bottom - 10) - ((curBlock.height()-1) * (i-2));
+                        weight = wMblock;
+
+                    } else if (curBlock.hasClass("img_block_big")) {
+
+                        for (i=5; i < 6; i++) {
+                            if (typeof(arrBlock[i]) == 'undefined') {
+                                break;
+                            }
+                        }
+
+                        left = boxBinder.left + 43;
+                        top = (boxBinder.bottom - 10) - ((curBlock.height()-1) * (i-4));
+                        weight = wBblock;
                     }
+
+                   
+                    //seesaw_deg
+
+
+                    top += (seesaw_deg*1.5/zoom);
+                    //arrBlock[0].animate({top:rtop}, 1000);
     
-                    // 이미 올라가있는 블럭이 있으면 안올림
-                    if (typeof(arrBlock[boxBinder.index]) !== 'undefined') {
-                        //curBlock.remove();
-                        backToHome();
-    
-                    } else {
-    
-                        backToHome();
-    
-                        curBlock.css({left:boxBinder.left, top:top});
-                        curBlock.data("weight", weight);
-                        curBlock.data("left", boxBinder.left);
-                        curBlock.data("top", top);
-                        curBlock.data("index", boxBinder.index);
-                        arrBlock[boxBinder.index] = curBlock;
+                    curBlock.css({left:left, top:top});
+                    curBlock.data("weight", weight);
+                    curBlock.data("left", left);
+                    curBlock.data("top", top);
+                    curBlock.data("index", i);
+                    arrBlock[i] = curBlock;
     
                         
                         
-                    }
+                    
                     
                 }
                 
@@ -254,36 +262,29 @@
          *  
          */
         function checkArea(pos) {
-            // x start 180, y start 730
-            // x end 630, y end 830
-    
-    
-            // 195, 610, 38
-    
-            var offsetX = 37.72 / 1;
-            var standardX = 170 / 1;
+
+            var scale = $(".img_scale_right");
+
+            scale.offset();
+
+            console.log(scale.offset());
+            console.log(scale.width());
+
+            var top = scale.offset().top;
+            var left = scale.offset().left;
+            var right = scale.width()+left;
+            var bottom = scale.height()+top;
             
             // 세로축 안으로 들어옴
-            if (pos.top >= 345/1 && pos.top <= 445/1) {
-    
+            if (pos.top >= top && pos.top <= bottom) {
                 // 가로축 안으로 들어옴
-                if (pos.left >= 155/1 && pos.left <= 610/1) {
-                    for (var i = 0; i < 11; i++) {
-                        
-                        var right = standardX + ((i+1)*offsetX);
-    
-                        // 시소의 어느 위치에 있는지 찾음
-                        if (pos.left < right) {
-                            //alert(i);
-                            return {
-                                index : i,
-                                left : right-offsetX
-                            }
-    
-                            break;
-                        }
-    
-                    }
+                if (pos.left >= left && pos.left <= right) {
+                    return {
+                        top : top,
+                        left : left,
+                        right : right,
+                        bottom : bottom
+                    };
                 }
             }
     
@@ -297,35 +298,18 @@
          */
         function decision() {
     
-            var left_weight = 0;
+            var left_weight = wGstick;
             var right_weight = 0;
     
-            if (arrBlock[0]) left_weight += arrBlock[0].data("weight") * 5
-            if (arrBlock[1]) left_weight += arrBlock[1].data("weight") * 4
-            if (arrBlock[2]) left_weight += arrBlock[2].data("weight") * 3
-            if (arrBlock[3]) left_weight += arrBlock[3].data("weight") * 2
-            if (arrBlock[4]) left_weight += arrBlock[4].data("weight") * 1
-    
-            if (arrBlock[6]) right_weight += arrBlock[6].data("weight") * 1
-            if (arrBlock[7]) right_weight += arrBlock[7].data("weight") * 2
-            if (arrBlock[8]) right_weight += arrBlock[8].data("weight") * 3
-            if (arrBlock[9]) right_weight += arrBlock[9].data("weight") * 4
-            if (arrBlock[10]) right_weight += arrBlock[10].data("weight") * 5
-    
-    
-            var deg;
-            if (left_weight < right_weight) {
-                deg = 5;
-            } else if (left_weight > right_weight) {
-                deg = -5;
-            } else {
-                deg = 0;
+            for (var i = 0; i < 6; i++) {
+                if (arrBlock[i]) right_weight += arrBlock[i].data("weight")
             }
+
+            var deg = (right_weight-left_weight)/rVar;
+
+
     
             animate(deg);
-    
-            //console.log(left_weight);
-            //console.log(right_weight);
     
         }
     
@@ -347,9 +331,9 @@
                     
     
                     //console.log(top);
-                    top -= level;
-                } else if (deg > 0) {
                     top += level;
+                } else if (deg > 0) {
+                    top -= level;
                 } else {
     
                 }
@@ -362,12 +346,24 @@
                 
             }
     
+            /*
+            $(".img_bar").rotate(-(slope));
+            var posLeftScale = 90; //$(".img04").offset().top/zoom;
+            var posRightScale = 90; //$(".img05").offset().top/zoom;
+
+            posLeftScale += (slope*1.5/zoom);
+            posRightScale -= (slope*1.5/zoom);
+
+            $(".img_scale_left").offset({top:posLeftScale});
+            $(".img_scale_right").offset({top:posRightScale});
+            */
+
     
             var degDiff = deg != seesaw_deg;
             if (degDiff) {
-                seesaw_deg = deg;
                 
-                $(".img04").rotate({
+                
+                $(".img_bar").rotate({
                     angle: 0,
                     animateTo:seesaw_deg,
                     easing : function(x, t, b, c, d) { 
@@ -377,21 +373,65 @@
                 });
     
     
-                // box 돌리기
-                for (var i = 0; i < 11; i++) {
-                    if (arrBlock[i]) {
-                        arrBlock[i].rotate({animateTo:seesaw_deg});
+                var posLeftScale = 90; //$(".img04").offset().top/zoom;
+                var posRightScale = 90; //$(".img05").offset().top/zoom;
+    
+                posLeftScale -= (deg*1.5/zoom);
+                posRightScale += (deg*1.5/zoom);
+
+                $(".img_scale_left").animate({top:posLeftScale}, 1000);
+                $(".img_scale_right").animate({top:posRightScale}, 1000);
+                
+
+                if (arrBlock[0]) {
+                    var rtop = arrBlock[0].offset().top + (deg*1.5/zoom);
+                    arrBlock[0].animate({top:rtop}, 1000);
+
+                    if (arrBlock[1]) {
+                        var rtop2 = rtop - (arrBlock[0].height()-1)
+                        arrBlock[1].animate({top:rtop2}, 1000);
+                    }
+
+                    if (arrBlock[2]) {
+                        var rtop3 = rtop - (arrBlock[1].height()-1) 
+                        arrBlock[2].animate({top:rtop3}, 1000);
+                    }
+
+                }
+
+                if (arrBlock[3]) {
+
+
+                    var rtop = arrBlock[3].offset().top + (deg*1.5/zoom);
+                    arrBlock[3].animate({top:rtop}, 1000);
+
+                    if (arrBlock[4]) {
+                        var rtop2 = rtop - (arrBlock[3].height()-1)
+                        arrBlock[4].animate({top:rtop2}, 1000);
                     }
                 }
-                
+
+                if (arrBlock[5]) {
+                    
+                    var rtop = arrBlock[5].offset().top + (deg*1.5/zoom);
+                    arrBlock[5].animate({top:rtop}, 1000);
+
+                }
+
+
+                for (var i = 0; i < 6; i++) {
+                    if (arrBlock[i]) {
+
+                    }
+                }
+
+                seesaw_deg = deg;
+  
             }
     
-            var step = -15.5/zoom;
-            for (var i = 0; i < 11; i++) {
-                correct(arrBlock[i], step, deg, degDiff);
-    
-                step += 3.0/zoom;
-            }
+            
+            
+            
        
         }
     
@@ -411,20 +451,17 @@
             curBlock = undefined;
     
             seesaw_deg = 0;
-            $(".img04").rotate(seesaw_deg);
+            $(".img_bar").rotate(seesaw_deg);
     
         }
     
     
     
         function initBlockPos(objBlocks) {
-            
-            
+                        
             for (var i = 0; i < objBlocks.length; i++) {
                 var orgLeft = $(objBlocks[i]).offset().left/zoom;
                 var orgTop = $(objBlocks[i]).offset().top/zoom;
-    
-                console.log($(objBlocks[i]).offset());
 
                 $(objBlocks[i]).data("orgLeft", orgLeft);
                 $(objBlocks[i]).data("orgTop", orgTop);
@@ -464,27 +501,29 @@
 
             // 최초 저울이 기울어 지도록 
             var slope = wGstick/rVar;
-            $(".img02").rotate(-(slope));
+            $(".img_bar").rotate(-(slope));
             var posLeftScale = 90; //$(".img04").offset().top/zoom;
             var posRightScale = 90; //$(".img05").offset().top/zoom;
 
             posLeftScale += (slope*1.5/zoom);
             posRightScale -= (slope*1.5/zoom);
 
-            $(".img04").offset({top:posLeftScale});
-            $(".img05").offset({top:posRightScale});
+            $(".img_scale_left").offset({top:posLeftScale});
+            $(".img_scale_right").offset({top:posRightScale});
 
-            /*
-    
-            // 안내문구, 확인버튼 최초 감추기
-            $(".finger").hide();
-            $(".btn_ok_area").hide();
-
-            $(".txt_answer").on("keydown", checkTextArea);
-            $(".btn_ok_area").on(touchstart, onClickOk);
+            seesaw_deg = slope;
 
             var objBlocks = $(sBlock);
             initBlockPos(objBlocks);
+
+            objBlocks.on(touchstart, onTouchStartBlock);
+            $(sContainer).on(touchmove, onTouchMoveContainer);
+            objBlocks.on(touchend, onTouchEndContainer);
+
+            /*
+ 
+
+            
     
             objBlocks.on(touchstart, onTouchStartBlock);
             $(sContainer).on(touchmove, onTouchMoveContainer);
