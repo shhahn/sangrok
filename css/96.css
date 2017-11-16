@@ -45,29 +45,37 @@
 .game_wrap li:nth-child(n+6){ margin-bottom: 0px; }
 
 /* 사진 카드 */
-.game_wrap .card_image li:nth-child(1){background: url(../images/p96/card1_1.png) 0 0 no-repeat; background-size: contain;}
-.game_wrap .card_image li:nth-child(2){background: url(../images/p96/card1_back.png) 0 0 no-repeat; background-size: contain;}
-.game_wrap .card_image li:nth-child(3){background: url(../images/p96/card1_back.png) 0 0 no-repeat; background-size: contain;}
-.game_wrap .card_image li:nth-child(4){background: url(../images/p96/card1_back.png) 0 0 no-repeat; background-size: contain;}
-.game_wrap .card_image li:nth-child(5){background: url(../images/p96/card1_back.png) 0 0 no-repeat; background-size: contain;}
-.game_wrap .card_image li:nth-child(6){background: url(../images/p96/card1_back.png) 0 0 no-repeat; background-size: contain;}
-.game_wrap .card_image li:nth-child(7){background: url(../images/p96/card1_back.png) 0 0 no-repeat; background-size: contain;}
-.game_wrap .card_image li:nth-child(8){background: url(../images/p96/card1_back.png) 0 0 no-repeat; background-size: contain;}
-.game_wrap .card_image li:nth-child(9){background: url(../images/p96/card1_back.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_image li div.back{background: url(../images/p96/card1_back.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_image li div.card_image1{background: url(../images/p96/card1_1.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_image li div.card_image2{background: url(../images/p96/card1_2.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_image li div.card_image3{background: url(../images/p96/card1_3.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_image li div.card_image4{background: url(../images/p96/card1_4.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_image li div.card_image5{background: url(../images/p96/card1_5.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_image li div.card_image6{background: url(../images/p96/card1_6.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_image li div.card_image7{background: url(../images/p96/card1_7.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_image li div.card_image8{background: url(../images/p96/card1_8.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_image li div.card_image9{background: url(../images/p96/card1_8.png) 0 0 no-repeat; background-size: contain;}
 
-/* 텍스트 카드 */
-.game_wrap .card_txt li:nth-child(1){background: url(../images/p96/card2_back.png) 0 0 no-repeat; background-size: contain;}
-.game_wrap .card_txt li:nth-child(2){background: url(../images/p96/card2_back.png) 0 0 no-repeat; background-size: contain;}
-.game_wrap .card_txt li:nth-child(3){background: url(../images/p96/card2_back.png) 0 0 no-repeat; background-size: contain;}
-.game_wrap .card_txt li:nth-child(4){background: url(../images/p96/card2_back.png) 0 0 no-repeat; background-size: contain;}
+/*
+.game_wrap .card_image li:nth-child(9) div.front{background: url(../images/p96/card1_9.png) 0 0 no-repeat; background-size: contain;}
 .game_wrap .card_txt li:nth-child(5){background: url(../images/p96/card2_1.png) 0 0 no-repeat; background-size: contain;}
-.game_wrap .card_txt li:nth-child(6){background: url(../images/p96/card2_back.png) 0 0 no-repeat; background-size: contain;}
-.game_wrap .card_txt li:nth-child(7){background: url(../images/p96/card2_back.png) 0 0 no-repeat; background-size: contain;}
-.game_wrap .card_txt li:nth-child(8){background: url(../images/p96/card2_back.png) 0 0 no-repeat; background-size: contain;}
-.game_wrap .card_txt li:nth-child(9){background: url(../images/p96/card2_back.png) 0 0 no-repeat; background-size: contain;}
+*/
+/* 텍스트 카드 */
+.game_wrap .card_txt li div.back{background: url(../images/p96/card2_back.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_txt li div.card_txt1{background: url(../images/p96/card2_1.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_txt li div.card_txt2{background: url(../images/p96/card2_2.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_txt li div.card_txt3{background: url(../images/p96/card2_3.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_txt li div.card_txt4{background: url(../images/p96/card2_4.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_txt li div.card_txt5{background: url(../images/p96/card2_5.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_txt li div.card_txt6{background: url(../images/p96/card2_6.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_txt li div.card_txt7{background: url(../images/p96/card2_7.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_txt li div.card_txt8{background: url(../images/p96/card2_8.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap .card_txt li div.card_txt9{background: url(../images/p96/card2_9.png) 0 0 no-repeat; background-size: contain;}
 
 /* 정답 동그라미 */
 .game_wrap li.true::before{ position: absolute; top:0px; left:3px; content: ''; display: block; width: 155px; height: 118px; background: url(../images/p96/ok.png) 0 0 no-repeat; background-size: contain;}
+.game_wrap li.true div.back::before{ position: absolute; top:0px; left:3px; content: ''; display: block; width: 155px; height: 118px; background: url(../images/p96/ok.png) 0 0 no-repeat; background-size: contain;}
+
 
 /* 정답 화면 */
 .right_all{ position: absolute; top:280px; left:117px; width: 534px; height: 490px; background: url(../images/p96/final.png) 0 0 no-repeat; background-size: contain; }

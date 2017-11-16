@@ -9,8 +9,11 @@
 	<link rel="stylesheet" type="text/css" href="css/96.css" />
 	<script src="js/DTCaliperSensor.js"></script>
 	<script src="js/jquery-1.11.0.min.js"></script>
+	<script src="js/jquery.rotate.js"></script>
+	<script src="js/jquery.flip.js"></script>
 	<script src="js/common.js"></script>
 	<script src="js/96.js"></script>
+	<script src="js/96_interaction.js"></script>
 </head>
 <body>
 <div class="wrap"><!--[[ wrap Start ]]-->
@@ -45,7 +48,7 @@
 		<!--[[ 버튼 시작 ]]-->
 		<div class="btn_wrap">
 			<div class="btn btnStudy">
-				<div class="ico">보충심화</div>
+				<div class="ico btn_open_layer">보충심화</div>
 				<p class="txt dtext_cls_video" title="카드 맞추기 게임">카드 맞추기<br />게임</p>
 			</div>
 		</div>
@@ -94,7 +97,14 @@
 						
 						<div class="card_image">
 							<ul>
-								<li class="true"></li>
+								<li class="">
+									<div class="front"> 
+										Front content
+									</div> 
+									<div class="back">
+										Back content
+									</div> 
+								</li>
 								<li></li>
 								<li></li>
 								<li></li>
@@ -120,7 +130,7 @@
 							</ul>
 						</div>
 						
-						<div class="right_all"></div>
+						<div class="right_all img_cong"></div>
 
 					</div>	
 
