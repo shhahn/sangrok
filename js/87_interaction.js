@@ -681,8 +681,17 @@
                 backToHome();
             } else {
 
-                //backToHome();
+                // 만약 퀴즈 정답 박스 라면 
+                if (boxBinder.target == "answer01" || boxBinder.target == "answer02" || boxBinder.target == "answer03") {
 
+                    // 관련 처리 하고 종료
+
+                    
+
+                    return;
+                }
+
+                // 여기 부턴 저울 로직 
                 var i;
                 var left;
                 var top;
@@ -747,30 +756,36 @@
      */
     function checkArea(pos) {
 
-        var scale = $(".img_scale_right");
+        function checkAreaLogic(pos, target, area) {
 
-        scale.offset();
+            var top = area.offset().top;
+            var left = area.offset().left;
+            var right = area.width()+left;
+            var bottom = area.height()+top;
 
-        //console.log(scale.offset());
-        //console.log(scale.width());
-
-        var top = scale.offset().top;
-        var left = scale.offset().left;
-        var right = scale.width()+left;
-        var bottom = scale.height()+top;
-        
-        // 세로축 안으로 들어옴
-        if (pos.top >= top && pos.top <= bottom) {
-            // 가로축 안으로 들어옴
-            if (pos.left >= left && pos.left <= right) {
-                return {
-                    top : top,
-                    left : left,
-                    right : right,
-                    bottom : bottom
-                };
+            // 왼쪽 저울 세로축 안으로 들어옴
+            if (pos.top >= top && pos.top <= bottom) {
+                // 가로축 안으로 들어옴
+                if (pos.left >= left && pos.left <= right) {
+                    return {
+                        target  : target,
+                        top     : top,
+                        left    : left,
+                        right   : right,
+                        bottom  : bottom
+                    };
+                }
             }
+
+            return undefined;
         }
+
+        var ret;
+        if (ret = checkAreaLogic(pos, "left", $(".img_scale_left2"))) return ret;
+        if (ret = checkAreaLogic(pos, "right", $(".img_scale_right2"))) return ret;
+        if (ret = checkAreaLogic(pos, "answer01", $(".answer_box01"))) return ret;
+        if (ret = checkAreaLogic(pos, "answer02", $(".answer_box02"))) return ret;
+        if (ret = checkAreaLogic(pos, "answer03", $(".answer_box03"))) return ret;
 
         return undefined;
     }
@@ -782,16 +797,21 @@
      */
     function decision() {
 
-        var left_weight = wGstick;
+        var left_weight = 0;
         var right_weight = 0;
 
-        for (var i = 0; i < 6; i++) {
+        for (var i = 0; i < 3; i++) {
+            if (arrBlock[i]) left_weight += arrBlock[i].data("weight")
+        }
+
+        for (var i = 3; i < 6; i++) {
             if (arrBlock[i]) right_weight += arrBlock[i].data("weight")
         }
 
-        var deg = (right_weight-left_weight)/rVar;
+        var deg = (left_weight-right_weight)/rVar;
 
-
+        //console.log("decision");
+        //console.log(deg);
 
         animate(deg);
 
@@ -810,10 +830,7 @@
 
             var top = block.data("top");
 
-            
             if (deg < 0) {
-                
-
                 //console.log(top);
                 top += level;
             } else if (deg > 0) {
@@ -830,11 +847,14 @@
             
         }
 
+        //console.log(deg);
+        //console.log(seesaw_deg);
+
         var degDiff = deg != seesaw_deg;
         if (degDiff) {
             
             
-            $(".img_bar").rotate({
+            $(".img_bar2").rotate({
                 angle: 0,
                 animateTo:seesaw_deg,
                 easing : function(x, t, b, c, d) { 
