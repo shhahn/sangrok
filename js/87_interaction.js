@@ -685,8 +685,9 @@
                 if (boxBinder.target == "answer01" || boxBinder.target == "answer02" || boxBinder.target == "answer03") {
 
                     // 관련 처리 하고 종료
+                    insertAnswerBox(boxBinder);
 
-                    
+                    curBlock = undefined;
 
                     return;
                 }
@@ -749,6 +750,30 @@
 
             curBlock = undefined;
         }        
+    }
+
+    /**
+     * 
+     * @param {*} boxBinder 
+     */
+    function insertAnswerBox(boxBinder) {
+
+        var weight;
+        if (curBlock.hasClass("img_block_small")) weight = 10;
+        if (curBlock.hasClass("img_block_mid")) weight = 20;
+        if (curBlock.hasClass("img_block_big")) weight = 30;
+
+        var i;
+        if (boxBinder.target == "answer01") i = 7;
+        if (boxBinder.target == "answer02") i = 8;
+        if (boxBinder.target == "answer03") i = 9;
+
+        curBlock.css({left:boxBinder.left + 10, top:boxBinder.top + 10});
+        curBlock.data("weight", weight);
+        curBlock.data("left", boxBinder.left);
+        curBlock.data("top", boxBinder.top);
+        curBlock.data("index", i);
+        arrBlock[i] = curBlock;
     }
 
     /**
@@ -969,6 +994,8 @@
         $(sContainer).on(touchmove, onTouchMoveContainer);
         objBlocks.on(touchend, onTouchEndContainer);
 
+        $(".btn_ok").on(touchstart, onClickBtnOk);
+
         // 최초 저울이 기울어 지도록 
         /*
         var slope = wGstick/rVar;
@@ -988,6 +1015,42 @@
         */
     }
 
+
+    /**
+     * 확인 버튼 클릭
+     */
+    function onClickBtnOk() {
+
+        function fail() {
+
+            // 좌표 리셋 로직 추가
+            alert("좌표 리셋");
+        }
+
+        function success() {
+
+            $(".img_cong").show();
+
+            setTimeout(function(){
+                $(".img_cong").fadeOut();
+                
+            }, 5000);
+
+        }
+
+        var arrWeight = [];
+        arrWeight[6] = 100;
+
+        for (var i = 7; i < 10; i++) {
+            if (typeof(arrBlock[i]) == 'undefined') { fail(); return; }
+            arrWeight[i] = arrBlock[i].data("weight");
+            if (arrWeight[i-1] <= arrWeight[i]) {fail(); return;}
+        }
+
+        success();
+
+    }
+
     /**
      * document load event
      */
@@ -1001,6 +1064,7 @@
         $(".btn_open_layer").on(touchend, function(){
             setTimeout(init, 1000);
         });
+        
         
         //$(".layer_wrap").on(touchstart, function(e){
         //    console.log(e);
