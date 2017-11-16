@@ -12,6 +12,11 @@
 
     var doingGame = false;
 
+    var msTimeMax = 3 * 60 * 1000;
+    var msTime = msTimeMax;
+
+    var timeObj;
+
 
     function matching() {
 
@@ -109,43 +114,142 @@
         });
     }
 
+
+    /**
+     * 
+     */
+    function checkClear() {
+
+        if (!doingGame) return;
+
+
+        var answer = $(".card_image > ul > li.true");
+
+        if (answer.length == 9) {
+            // 소리?
+            $(".img_cong").fadeIn();
+            doingGame = false;
+        }
+
+
+        if (msTime <= 0) {
+            alert("실패");
+            doingGame = false;
+            //reset();
+            return;
+        }
+
+        var sTime = msTime / 1000;
+        var second = sTime % 60;
+        var minute = (sTime - second) / 60;
+
+        //console.log(sTime);
+
+        second += "";
+        minute += "";
+
+        if (second.length == 1) second = "0" + second;
+        if (minute.length == 1) minute = "0" + minute;
+
+        var timeBox = $(".num").find("span");
+
+        $(timeBox[0]).text(minute);
+        $(timeBox[1]).text(second);
+
+    }
+
     /**
      * 지연 초기화
      */
     function init_delay() {
 
         $(".card_image > ul > li").flip(true);
-        $(".card_txt > ul > li").flip(true, function(){doingGame = true;});
+        $(".card_txt > ul > li").flip(true, function(){
+            doingGame = true;
+
+            if (timeObj) clearInterval(timeObj);
+            msTime = msTimeMax;
+            checkClear();
+            timeObj = setInterval(function(){
+                msTime -= 1000;
+                checkClear();
+            }, 1000);
+
+        });
 
         //$(".screen").fadeIn();
         
+
+        //console.log("init delay");
+        
     }
+
+    /**
+     * 리셋
+     */
+    function reset() {
+        
+        if (timeObj) clearInterval(timeObj);
+        msTime = msTimeMax;
+        checkClear();
+
+        doingGame = false;
+        $(".img_cong").hide();
+
+        $(".card_image > ul > li").remove();
+        $(".card_txt > ul > li").remove();
+
+        $(".card_image > ul").append(cardImageClone.clone());
+        $(".card_txt > ul").append(cardtxtClone.clone());
+
+        $(".card_image > ul > li").shuffle();
+        $(".card_txt > ul > li").shuffle();
+        $(".card_image > ul > li").off(".flip").flip({trigger:'manual'});
+        $(".card_txt > ul > li").off(".flip").flip({trigger:'manual'});
+
+        $(".card_image > ul > li").flip(false);
+
+        $(".card_image > ul > li").on("click", onClickImage);
+        $(".card_txt > ul > li").on("click", onClickTxt);
+
+        curCardImage = undefined;
+        curCardTxt = undefined;
+
+        //console.log("reset");
+
+        setTimeout(init_delay, 3000);
+    }
+
+    var cardImageClone;
+    var cardtxtClone;
 
     /**
      * 초기화
      */
     function init() {
-        setTimeout(init_delay, 3000);
+        
+        cardImageClone = $(".card_image > ul > li").clone();
+        cardtxtClone = $(".card_txt > ul > li").clone();
 
-        // 축하 메세지 감추기
-        $(".img_cong").hide();
+        
 
-        $(".card_image > ul > li").shuffle();
-        $(".card_txt > ul > li").shuffle();
-        $(".card_image > ul > li").flip({trigger:'manual'});
-        $(".card_txt > ul > li").flip({trigger:'manual'});
+        
 
-        $(".card_image > ul > li").on("click", onClickImage);
-        $(".card_txt > ul > li").on("click", onClickTxt);
+        $(".btnReset").on("click", reset);
+        
+
+        //reset();
 
     }
 
     $(function(){
-        //init();
+        init();
+
+        
 
         $(".btn_open_layer").click(function(){
 
-            init();
+            reset();
         });
 
     });
