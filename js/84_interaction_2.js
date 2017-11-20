@@ -1,5 +1,17 @@
 (function($){
 
+    var zoom;
+    function viewport(){
+        if (parent.ZOOMVALUE == undefined) {
+            parent.ZOOMVALUE = 1;
+        }
+        zoom = parent.ZOOMVALUE;
+    }
+    
+    viewport();
+    $(window).resize(function(){
+        viewport();
+    });
 
 
     $(function(){
