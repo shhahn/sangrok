@@ -16,23 +16,26 @@
 
     $(function(){
 
+        
+
+
         $(".img_block").draggable({
 
             start : function (e, ui) {
 
+                ui.position.top /= zoom;
+                ui.position.left /= zoom;
 
-                console.log(e);
-                console.log(ui);
-
-                ui.position.top -= 200;
             },
 
             drag : function (e, ui) {
-                ui.position.top -= 200;
+                ui.position.top /= zoom;
+                ui.position.left /= zoom;
             },
 
             stop : function (e, ui) {
-                ui.position.top -= 200;
+                ui.position.top /= zoom;
+                ui.position.left /= zoom;
 
             }
 
@@ -43,6 +46,7 @@
             drop: function( event, ui ) {
 
                 console.log("drop!!");
+                debugView.log("dropt!!");
                 $( this )
                     .addClass( "ui-state-highlight" )
                     .find( "p" )
