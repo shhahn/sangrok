@@ -52,6 +52,25 @@
             e.className = "slidein";
         }
         */
+
+        $(function(){
+
+            $(".img04").rotate(10);
+
+            
+
+            setTimeout(function(){
+                var xx = $(".box_img_01");
+                xx.show();
+                //alert(xx[0]);
+                $(".drop_area_01").append(xx);
+
+                $(".img04").rotate({angle:10, animateTo:45});
+
+            }, 1000);
+
+        });
+
     </script>
 
 
@@ -117,7 +136,11 @@
         <div class="imgbox img03"><img src="images/84/084_01_bg.png" alt="" /></div>
         <div class="imgbox img04">
             <img src="images/84/084_01_bar.png" alt="" />
-            <div class="drop_area" style="border:1px solid; width:450px; height:100px; position:absolute; left:-15px; top:-50px;" ></div>
+            <div class="drop_area" style="border:1px solid; width:415px; height:60px; position:absolute; left:0px; top:-35px;" >
+                <div class="drop_area_01" style="background-color:red; width:40px;height:60px;">
+                    
+                </div>
+            </div>
         </div>
         <div class="imgbox img05"><img src="images/84/084_01_mask.png" alt="" /></div>
         <div class="imgbox img06 img_block">
@@ -180,6 +203,6 @@
     </div>
     <div class="layer_foot"></div>
 </div><!--[[ 레이어팝업 끝 : view 실험관찰 ]]-->
-
+<img class="box_img_01" style="display:none;width:40px;height:60px;" src="images/84/084_01_block1.png" />
 </body>
 </html>
