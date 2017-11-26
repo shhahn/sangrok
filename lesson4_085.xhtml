@@ -11,6 +11,7 @@
 	<script src="js/jquery-1.11.0.min.js"></script>
 	<script src="js/jquery.rotate.js"></script>
 	<script src="js/common.js"></script>
+	<script src="js/dragdrop_rotate.js"></script>
 	<script src="js/85.js"></script>
 	<script src="js/85_interaction.js"></script>
 	<style>
@@ -74,16 +75,28 @@
 
 					<div class="page_title bul02">수평대를 사용하여 다음 두 물체의 무게를 비교하는 방법을 써 봅시다.</div>
 
-					<div class="imgbox img04">
+					<div class="imgbox img04 drop_area" data-offset-y="-55">
 						<img src="images/85/085_01_bar.png" alt="" />
-						<div class="drop_area" style="width:450px; height:100px; position:absolute; left:-15px; top:-50px;" ></div>
+						<div class="" style="width:415px; height:70px; position:absolute; left:0px; top:-55px;" >
+							<div class="drop_container drop_container_left" data-weight="5" style="display:inline-block; padding:0; margin-left:0px; width:38px;height:60px;"></div>
+							<div class="drop_container drop_container_left" data-weight="4" style="display:inline-block; padding:0; margin-left:-4px; width:38px;height:60px;"></div>
+							<div class="drop_container drop_container_left" data-weight="3" style="display:inline-block; padding:0; margin-left:-4px; width:38px;height:60px;"></div>
+							<div class="drop_container drop_container_left" data-weight="2" style="display:inline-block; padding:0; margin-left:-4px; width:38px;height:60px;"></div>
+							<div class="drop_container drop_container_left" data-weight="1" style="display:inline-block; padding:0; margin-left:-4px; width:38px;height:60px;"></div>
+							<div class="drop_container" data-weight="0" style="display:inline-block; padding:0; margin-left:-4px; width:38px;height:60px;"></div>
+							<div class="drop_container drop_container_right" data-weight="1" style="display:inline-block; padding:0; margin-left:-4px; width:38px;height:60px;"></div>
+							<div class="drop_container drop_container_right" data-weight="2" style="display:inline-block; padding:0; margin-left:-4px; width:38px;height:60px;"></div>
+							<div class="drop_container drop_container_right" data-weight="3" style="display:inline-block; padding:0; margin-left:-4px; width:38px;height:60px;"></div>
+							<div class="drop_container drop_container_right" data-weight="4" style="display:inline-block; padding:0; margin-left:-4px; width:38px;height:60px;"></div>
+							<div class="drop_container drop_container_right" data-weight="5" style="display:inline-block; padding:0; margin-left:-4px; width:38px;height:60px;"></div>
+						</div>
 					</div>
 					<div class="imgbox img05"><img src="images/85/085_01_mask.png" alt="" /></div>
-					<div class="imgbox img06 img_block">
+					<div class="imgbox img06 drag_box" data-offset-y="0" data-weight="1">
 						<img src="images/85/b85_04.png" alt="" />
 						<div style="left:0; top:0; width:45px; height:70px; position:absolute;"></div>
 					</div>
-					<div class="imgbox img07 img_block">
+					<div class="imgbox img07 drag_box" data-offset-y="0" data-weight="1.5">
 						<img src="images/85/b85_05.png" alt="" />
 						<div style="left:0; top:0; width:35px; height:70px; position:absolute;"></div>
 					</div>

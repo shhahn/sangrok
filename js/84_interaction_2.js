@@ -21,7 +21,8 @@
             var rdd = new CRotateDragDrop({
                 dropArea : '.drop_area',
                 dragBox : '.drag_box',
-                btnReset : '.btnReset'
+                btnReset : '.btnReset',
+                wrap : '.container'
             });
         }, 500);
         

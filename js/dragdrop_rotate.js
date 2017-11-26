@@ -10,6 +10,8 @@ function CRotateDragDrop(info) {
     this.dragBox = info.dragBox;
 
     this.btnReset = info.btnReset;
+
+    this.wrap = info.wrap;
     
     this.orgDragBoxPos = new Array();
     this.curDragBoxPos = new Array();
@@ -35,6 +37,7 @@ function CRotateDragDrop(info) {
     */
 
     $(this.dragBox).each(function (i, e) {
+        //console.log($(e).position());
         self.orgDragBoxPos.push($(e).position()); // 좌표 복원용 (원래 있던자리)
         self.curDragBoxPos.push($(e).position()); // 좌표 비교용 (현재 item 이 있는곳
     });
@@ -51,7 +54,7 @@ function CRotateDragDrop(info) {
     $(this.dragBox).on(touchend, function(e){ self.onTouchEnd(e); });
     $(this.btnReset).on(touchstart, function(e){ self.reset(e) });
 
-    $(".container").on(touchmove, function(e){ self.onTouchMove(e); });
+    $(this.wrap).on(touchmove, function(e){ self.onTouchMove(e); });
 
 }
 
@@ -173,7 +176,7 @@ CRotateDragDrop.prototype.onTouchStart = function(e) {
     
     if (!el.hasClass("drag_box")) el = el.parents(".drag_box");
 
-    console.log(el[0]);
+    //console.log(el[0]);
 
     //var debug = "zoomViews : " + zoom;
     //debug += "<br /> x : "+ x ;
@@ -187,9 +190,9 @@ CRotateDragDrop.prototype.onTouchStart = function(e) {
     for (var i = 0; i < this.curDragBoxPos.length; i++) {
 
         var pos = this.curDragBoxPos[i];
-        
+        console.log(pos);
         if (x > pos.left && x < pos.left + el.width() && y > pos.top && y < pos.top + el.height()){
-            //console.log(el[0]);
+            
             this.curDragBoxIdx = i;
             this.curDragBox = el;
 
