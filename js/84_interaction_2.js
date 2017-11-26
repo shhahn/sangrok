@@ -17,10 +17,14 @@
 
     $(function(){
 
-        var rdd = new CRotateDragDrop({
-            dropArea : '.drop_area',
-            dragBox : '.drag_box'
-        });
+        setTimeout(function(){
+            var rdd = new CRotateDragDrop({
+                dropArea : '.drop_area',
+                dragBox : '.drag_box',
+                btnReset : '.btnReset'
+            });
+        }, 500);
+        
 
 
         

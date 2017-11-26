@@ -8,6 +8,8 @@ function CRotateDragDrop(info) {
 
     // drag 오브젝트 셀렉터
     this.dragBox = info.dragBox;
+
+    this.btnReset = info.btnReset;
     
     this.orgDragBoxPos = new Array();
     this.curDragBoxPos = new Array();
@@ -18,6 +20,8 @@ function CRotateDragDrop(info) {
     this.curDragBox = undefined;
 
     this.curDeg = 0;
+
+    $(this.dropArea).off('click');
 
     /*
     info = {
@@ -45,21 +49,64 @@ function CRotateDragDrop(info) {
     $(this.dragBox).on(touchstart, function(e){ self.onTouchStart(e); });
     $(this.dragBox).on(touchmove, function(e){ self.onTouchMove(e); });
     $(this.dragBox).on(touchend, function(e){ self.onTouchEnd(e); });
+    $(this.btnReset).on(touchstart, function(e){ self.reset(e) });
 
     $(".container").on(touchmove, function(e){ self.onTouchMove(e); });
-    
-    console.log(this);
-
 
 }
+
+
+/**
+ * 
+ * @param {*} e 
+ */
+CRotateDragDrop.prototype.reset = function(e) {
+
+    console.log("reset");
+
+    var container = $(this.dropArea).find(".drop_container");
+    for (var i = 0; i < container.length; i++) {
+        var c = $(container[i]);
+
+        var bidx = c.data("bind-box-idx");
+        if (typeof(bidx) != 'undefined') {
+            c.removeData("bind-box-idx");
+            
+            var box = $(this.dragBox).eq(bidx);
+            box.removeData("bind-container-idx");
+    
+            this.curDragBoxPos[bidx].left = this.orgDragBoxPos[bidx].left;
+            this.curDragBoxPos[bidx].top = this.orgDragBoxPos[bidx].top;
+    
+            box.rotate(0);
+            box.css({
+                left: this.orgDragBoxPos[bidx].left / zoom,
+                top: this.orgDragBoxPos[bidx].top / zoom,
+            });
+            
+        }
+        
+        
+    }
+
+    this.resetContainerPos();
+    this.decision();
+    this.curDragBoxIdx = -1;
+};
+
 
 /**
  * 컨테이너 좌표 리셋 (기울기 조정 될때마다 호출 되어야함.)
  */
 CRotateDragDrop.prototype.resetContainerPos = function() {
     var self = this;
+    self.containerPos = [];
     $(this.dropArea).find('.drop_container').each(function (i, e) {
         self.containerPos.push($(e).position());
+        var bidx = $(e).data("bind-box-idx");
+        if (typeof(bidx) != 'undefined') {
+            self.curDragBox[bidx] = $(e).position();
+        }
     });
 };
 
@@ -72,6 +119,14 @@ CRotateDragDrop.prototype.resetContainerPos = function() {
  * @param {*} type 
  */
 CRotateDragDrop.prototype.moveDragBox = function(el,x,y,type){
+
+    //var debug = "zoomViews : " + zoom;
+    //debug += "<br /> x : "+ x ;
+    //debug += "<br /> y : "+ y;
+    //debug += "<br /> el.position().left : "+ el.position().left;
+    //debug += "<br /> el.position().top : "+ el.position().top;
+    //debugView.log(debug);
+
     switch (type) {
         case 'ani':
             el.stop().animate({
@@ -110,12 +165,22 @@ function boxArea(tg,area){
  */
 CRotateDragDrop.prototype.onTouchStart = function(e) {
     //console.log("touch start");
-    //console.log(e);
+    console.log(e);
 
     var x = e.pageX || e.originalEvent.changedTouches[0].pageX;
     var y = e.pageY || e.originalEvent.changedTouches[0].pageY;
-    var el = $(e.target).parents(".drag_box");
+    var el = $(e.target); //.parents(".drag_box");
     
+    if (!el.hasClass("drag_box")) el = el.parents(".drag_box");
+
+    console.log(el[0]);
+
+    //var debug = "zoomViews : " + zoom;
+    //debug += "<br /> x : "+ x ;
+    //debug += "<br /> y : "+ y;
+    //debug += "<br /> el.position().left : "+ el.position().left;
+    //debug += "<br /> el.position().top : "+ el.position().top;
+    //debugView.log(debug);
 
     //console.log(this.curDragBoxPos);
     //console.log(x+el.width());
@@ -127,6 +192,13 @@ CRotateDragDrop.prototype.onTouchStart = function(e) {
             //console.log(el[0]);
             this.curDragBoxIdx = i;
             this.curDragBox = el;
+
+            var cidx = el.data("bind-container-idx");
+            //console.log("cidx : "+cidx);
+            el.removeData("bind-container-idx");
+            //console.log("cidxx : "+el.data("bind-container-idx"));
+            $(this.dropArea).find(".drop_container").eq(cidx).removeData("bind-box-idx");
+
             break;
         }
     }
@@ -140,8 +212,9 @@ CRotateDragDrop.prototype.onTouchStart = function(e) {
 
     //mouseX = mouseX - tg.offset().left;
     //mouseY = mouseY - tg.offset().top;
-
-
+    this.resetContainerPos();
+    e.preventDefault();
+    e.stopPropagation();
 };
 
 /**
@@ -160,12 +233,15 @@ CRotateDragDrop.prototype.onTouchMove = function(e) {
     this.moveDragBox(this.curDragBox, x, y);
     
     //console.log(mouseX + " " + mouseY);
+
+    e.preventDefault();
+    e.stopPropagation();
 };
 
 /**
  * 드래그 끝
  */
-CRotateDragDrop.prototype.onTouchEnd = function(e) {
+CRotateDragDrop.prototype.onTouchEnd = function(event) {
     //console.log("touch end");
     //console.log(e);
 
@@ -192,19 +268,22 @@ CRotateDragDrop.prototype.onTouchEnd = function(e) {
         var offsetY = $(this.dropArea).data("offset-y");
         if (typeof(offsetY) == 'undefined') offsetY = 0;
 
-        var cLeft = ($(e).position().left + $(this.dropArea).position().left + offsetX) / zoom; 
-        var cTop = ($(e).position().top + $(this.dropArea).position().top + offsetY) / zoom; 
+        var cLeft_org = $(e).position().left + $(this.dropArea).position().left;
+        var cTop_org = $(e).position().top + $(this.dropArea).position().top;
+        var cLeft = cLeft_org /zoom + offsetX; 
+        var cTop = cTop_org /zoom + offsetY; 
         //var cTop = $(e).position().top/zoom;
 
         var dLeft = this.curPos.left;
         var dTop = this.curPos.top;
 
 
-        //var debug = "zoomViews : " + zoomViews;
+        //var debug = "zoomViews : " + zoom;
         //debug += "<br /> cLeft : "+ cLeft ;
         //debug += "<br /> cTop : "+ cTop;
-        //debug += "<br /> mouseX : "+ mouseX;
-        //debug += "<br /> mouseY : "+ mouseY;
+        //debug += "<br /> dLeft : "+ dLeft;
+        //debug += "<br /> dTop : "+ dTop;
+        //debugView.log(debug);
         //$("#debugView").html(debug);
 
 
@@ -234,18 +313,15 @@ CRotateDragDrop.prototype.onTouchEnd = function(e) {
                 if (typeof(boxOffsetY) == 'undefined') boxOffsetY = 0;
 
                 $(e).data("bind-box-idx", self.curDragBoxIdx);
-                this.curDragBox.data("bind-container_idx", i);
+                this.curDragBox.data("bind-container-idx", i);
 
                 this.curDragBox.animate({
                     left: cLeft,
-                    top: cTop + boxOffsetY/zoom,
+                    top: cTop + boxOffsetY,
                 }, function(){
                     //self.curDragBox.css({left:$(e).position().left, top:$(e).position().top + boxOffsetY/zoom});
                     //$(e).append(self.curDragBox);
-
-                    
                     self.decision();
-                    
                 });
 
                 isMagnetic = true;
@@ -260,19 +336,25 @@ CRotateDragDrop.prototype.onTouchEnd = function(e) {
     // 붙은게 없으면 원복
     if (!isMagnetic) {
 
-        this.curDragBoxPos[this.curDragBoxIdx].left = this.orgDragBoxPos[this.curDragBoxIdx].left / zoom;
-        this.curDragBoxPos[this.curDragBoxIdx].top = this.orgDragBoxPos[this.curDragBoxIdx].top / zoom;
+        this.curDragBoxPos[this.curDragBoxIdx].left = this.orgDragBoxPos[this.curDragBoxIdx].left;
+        this.curDragBoxPos[this.curDragBoxIdx].top = this.orgDragBoxPos[this.curDragBoxIdx].top;
 
+        this.curDragBox.rotate(0);
         this.curDragBox.animate({
             left: this.orgDragBoxPos[this.curDragBoxIdx].left / zoom,
             top: this.orgDragBoxPos[this.curDragBoxIdx].top / zoom,
         });
+
+        this.decision();
     }
 
     magneticX = false;
     magneticY = false;
 
     this.curDragBoxIdx = -1;
+    this.resetContainerPos();
+    event.preventDefault();
+    event.stopPropagation();
 
 
 };
@@ -330,6 +412,7 @@ CRotateDragDrop.prototype.decision = function() {
 
     this.rotate(deg);
     this.correct(deg);
+    
     //console.log(sumLeft);
 
 };
@@ -344,6 +427,7 @@ CRotateDragDrop.prototype.rotate = function(deg) {
     var degDiff = deg != this.curDeg;
     if (degDiff) {
         
+        this.resetContainerPos();
         
         $(this.dropArea).rotate({
             angle: this.curDeg,
@@ -386,8 +470,8 @@ CRotateDragDrop.prototype.correct = function(deg) {
             if (typeof(boxOffsetY) == 'undefined') boxOffsetY = 0;
 
             b.css({
-                left : c.position().left + $(this.dropArea).position().left,
-                top : c.position().top + $(this.dropArea).position().top + boxOffsetY + offsetY
+                left : (c.position().left + $(this.dropArea).position().left)/zoom,
+                top : (c.position().top + $(this.dropArea).position().top)/zoom + boxOffsetY + offsetY
             });
 
             b.rotate(deg);
