@@ -1,5 +1,6 @@
 (function($){
 
+    /*
     var zoom;
     function viewport(){
         if (parent.ZOOMVALUE == undefined) {
@@ -12,47 +13,17 @@
     $(window).resize(function(){
         viewport();
     });
-
+    */
 
     $(function(){
 
+        var rdd = new CRotateDragDrop({
+            dropArea : '.drop_area',
+            dragBox : '.drag_box'
+        });
+
+
         
-
-
-        $(".img_block").draggable({
-
-            start : function (e, ui) {
-
-                ui.position.top /= zoom;
-                ui.position.left /= zoom;
-
-            },
-
-            drag : function (e, ui) {
-                ui.position.top /= zoom;
-                ui.position.left /= zoom;
-            },
-
-            stop : function (e, ui) {
-                ui.position.top /= zoom;
-                ui.position.left /= zoom;
-
-            }
-
-        });
-
-
-        $( ".drop_area" ).droppable({
-            drop: function( event, ui ) {
-
-                console.log("drop!!");
-                debugView.log("dropt!!");
-                $( this )
-                    .addClass( "ui-state-highlight" )
-                    .find( "p" )
-                    .html( "Dropped!" );
-            }
-        });
 
 
     });

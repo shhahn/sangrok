@@ -13,6 +13,7 @@
     <script src="js/jquery.rotate.js"></script>
     <script src="js/common.js"></script>
     <script src="js/debugView.js"></script>
+    <script src="js/dragdrop_rotate.js"></script>
     <script src="js/84.js"></script>
     <script src="js/84_interaction_2.js"></script>
     
@@ -41,22 +42,16 @@
     </style>
 
     <script>
-        /*
-        function setup() {
-        var e = document.getElementById("watchme");
-        e.addEventListener("animationstart", listener, false);
-        e.addEventListener("animationend", listener, false);
-        e.addEventListener("animationiteration", listener, false);
-
-        var e = document.getElementById("watchme");
-            e.className = "slidein";
-        }
-        */
-
+        
         $(function(){
 
-            $(".img04").rotate(10);
+            //$(".drop_area").rotate(20);
 
+            /*
+            console.log($(".img04").offset());
+            //console.log($(".img01")[0]);
+            
+            
             
 
             setTimeout(function(){
@@ -65,9 +60,12 @@
                 //alert(xx[0]);
                 $(".drop_area_01").append(xx);
 
-                $(".img04").rotate({angle:10, animateTo:45});
+                console.log($(".img04").offset());
+                //console.log($(".img01")[0]);
+                //$(".img04").rotate({angle:20, animateTo:45});
 
             }, 1000);
+            */
 
         });
 
@@ -134,24 +132,32 @@
         <p class="bubble b01">수평이란 어느<br />한쪽으로 기울지<br />않은 상태를 말해요.</p>
 
         <div class="imgbox img03"><img src="images/84/084_01_bg.png" alt="" /></div>
-        <div class="imgbox img04">
+        <div class="imgbox img04 drop_area" data-offset-y="-55">
             <img src="images/84/084_01_bar.png" alt="" />
-            <div class="drop_area" style="border:1px solid; width:415px; height:60px; position:absolute; left:0px; top:-35px;" >
-                <div class="drop_area_01" style="background-color:red; width:40px;height:60px;">
-                    
-                </div>
+            <div class="" style="width:415px; height:70px; position:absolute; left:0px; top:-55px;" >
+                <div class="drop_container drop_container_left" data-weight="5" style="display:inline-block; padding:0; margin-left:0px; width:38px;height:60px;"></div>
+                <div class="drop_container drop_container_left" data-weight="4" style="display:inline-block; padding:0; margin-left:-4px; width:38px;height:60px;"></div>
+                <div class="drop_container drop_container_left" data-weight="3" style="display:inline-block; padding:0; margin-left:-4px; width:38px;height:60px;"></div>
+                <div class="drop_container drop_container_left" data-weight="2" style="display:inline-block; padding:0; margin-left:-4px; width:38px;height:60px;"></div>
+                <div class="drop_container drop_container_left" data-weight="1" style="display:inline-block; padding:0; margin-left:-4px; width:38px;height:60px;"></div>
+                <div class="drop_container" data-weight="0" style="display:inline-block; padding:0; margin-left:-4px; width:38px;height:60px;"></div>
+                <div class="drop_container drop_container_right" data-weight="1" style="display:inline-block; padding:0; margin-left:-4px; width:38px;height:60px;"></div>
+                <div class="drop_container drop_container_right" data-weight="2" style="display:inline-block; padding:0; margin-left:-4px; width:38px;height:60px;"></div>
+                <div class="drop_container drop_container_right" data-weight="3" style="display:inline-block; padding:0; margin-left:-4px; width:38px;height:60px;"></div>
+                <div class="drop_container drop_container_right" data-weight="4" style="display:inline-block; padding:0; margin-left:-4px; width:38px;height:60px;"></div>
+                <div class="drop_container drop_container_right" data-weight="5" style="display:inline-block; padding:0; margin-left:-4px; width:38px;height:60px;"></div>
             </div>
         </div>
         <div class="imgbox img05"><img src="images/84/084_01_mask.png" alt="" /></div>
-        <div class="imgbox img06 img_block">
+        <div class="imgbox img06 drag_box" data-offset-y="25" data-weight="1">
             <img src="images/84/084_01_block1.png" alt="" />
             <div class="img_screen" style="width:40px; height:45px; position:absolute; left:0; top:0;" ></div>
         </div>
-        <div class="imgbox img07 img_block">
+        <div class="imgbox img07 drag_box" data-offset-y="25" data-weight="1">
             <img src="images/84/084_01_block2.png" alt="" />
             <div class="img_screen" style="width:40px; height:45px; position:absolute; left:0; top:0;" ></div>
         </div>
-        <div class="imgbox img08 img_block img_block_double">
+        <div class="imgbox img08 drag_box" data-weight="2">
             <img src="images/84/084_01_block3.png" alt="" />
             <div class="img_screen" style="width:40px; height:80px; position:absolute; left:0; top:0;" ></div>
         </div>
