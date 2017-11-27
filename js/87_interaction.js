@@ -1062,7 +1062,7 @@
 
         // 지연시작 (좌표 결정 될때까지 대기)
         $(".btn_open_layer").on(touchend, function(){
-            setTimeout(init, 1000);
+            //setTimeout(init, 1000);
         });
         
         

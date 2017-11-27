@@ -54,7 +54,7 @@ function CRotateDragDrop(info) {
     $(this.dragBox).on(touchend, function(e){ self.onTouchEnd(e); });
     $(this.btnReset).on(touchstart, function(e){ self.reset(e) });
 
-    $(this.wrap).on(touchmove, function(e){ self.onTouchMove(e); });
+    //$(this.wrap).on(touchmove, function(e){ self.onTouchMove(e); });
 
 }
 
@@ -130,6 +130,10 @@ CRotateDragDrop.prototype.moveDragBox = function(el,x,y,type){
     //debug += "<br /> el.position().top : "+ el.position().top;
     //debugView.log(debug);
 
+    console.log(el);
+
+    if (!el.hasClass("drag_box")) el = el.parents(".drag_box");
+
     switch (type) {
         case 'ani':
             el.stop().animate({
@@ -139,7 +143,7 @@ CRotateDragDrop.prototype.moveDragBox = function(el,x,y,type){
             break;
     
         default:
-            el.stop().css({
+            el.css({
                 left: (x - el.width() / 2) / zoom,
                 top: (y - el.height() / 2) / zoom
             }, 500)
@@ -175,6 +179,9 @@ CRotateDragDrop.prototype.onTouchStart = function(e) {
     var el = $(e.target); //.parents(".drag_box");
     
     if (!el.hasClass("drag_box")) el = el.parents(".drag_box");
+
+
+    //el.rotate(0);
 
     //console.log(el[0]);
 

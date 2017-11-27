@@ -13,8 +13,9 @@
 	<script src="js/jquery-1.11.0.min.js"></script>
 	<script src="js/jquery.rotate.js"></script>
 	<script src="js/common.js"></script>
+	<script src="js/dragdrop_rotate.js"></script>
 	<script src="js/87.js"></script>
-	<script src="js/87_interaction.js"></script>
+	<script src="js/87_interaction_2.js"></script>
 
 	<script src="js/video_popup.js"></script>
 	<script src="js/87_video_play.js"></script>
@@ -81,7 +82,20 @@
 		<!--[[ 버튼 끝 ]]-->
 
 		<div class="imgbox img01"></div>
-		<div class="imgbox img02 img_bar"></div>
+		<div class="imgbox img02 drop_area">
+			<div style="border:1px solid; position:absolute; left:-15px; top:0; width:280px; height:150px;">
+				<div class="" data-weight="5" style="position:relative; display:inline-block; border:1px solid; padding:0; margin-left:0px; width:60px;height:150px;">
+					<div class="drop_container drop_container_left" data-weight="1" style="position:absolute; display:inline-block; border:1px solid; padding:0; margin-left:0px; width:10px;height:10px;">
+					</div>
+				</div>
+				<div class="" data-weight="5" style="display:inline-block; border:1px solid; padding:0; margin-left:0px; width:145px;height:150px;"></div>
+				<div class="" data-weight="5" style="position:relative; display:inline-block; border:1px solid; padding:0; margin-left:0px; width:60px;height:150px;">
+					<div class="drop_container drop_container_right" data-weight="1" style="position:absolute; display:inline-block; border:1px solid; padding:0; margin-left:0px; width:10px;height:10px;">
+					</div>
+				</div>
+			</div>
+
+		</div>
 		<div class="imgbox img03"></div>
 		<div class="imgbox img04 img_scale_left"></div>
 		<div class="imgbox img05 img_scale_right"></div>
