@@ -303,13 +303,15 @@ CRotateDragDrop.prototype.onTouchEnd = function(event) {
                     var sw = $(ds[j]).data("weight");
                     var boxidx = $(ds[j]).data("bind-box-idx");
 
-                    console.log(sw + " " + dw);
                     if (typeof(boxidx) == 'undefined' && sw == dw) {
 
                         cLeft_org = $(ds[j]).position().left + $(this.dropArea).position().left + $(this.dropArea).find(".drop_container_right").position().left - 10/zoom;
                         cTop_org = $(ds[j]).position().top + $(this.dropArea).position().top + $(this.dropArea).find(".drop_container_right").position().top + 10/zoom;
                         cLeft = cLeft_org /zoom + offsetX; 
                         cTop = cTop_org /zoom + offsetY; 
+
+
+                        $(ds[j]).data("bind-box-idx", this.curDragBoxIdx);
 
                         isMagnetic = true;
                         break;
@@ -332,9 +334,6 @@ CRotateDragDrop.prototype.onTouchEnd = function(event) {
                 }
             }
 
-
-            
-
             if (isMagnetic) {
                 
                 var boxOffsetY = this.curDragBox.data("offset-y");
@@ -352,7 +351,7 @@ CRotateDragDrop.prototype.onTouchEnd = function(event) {
                 }, function(){
                     //self.curDragBox.css({left:$(e).position().left, top:$(e).position().top + boxOffsetY/zoom});
                     //$(e).append(self.curDragBox);
-                    //self.decision();
+                    self.decision();
                 });
                 break;
             }
@@ -486,24 +485,56 @@ CRotateDragDrop.prototype.correct = function(deg) {
     var container = $(this.dropArea).find(".drop_container");
     for (var i = 0; i < container.length; i++) {
         var c = $(container[i]);
-        var boxIdx = c.data("bind-box-idx");
-        if (typeof(boxIdx) != 'undefined') {
-            var b = $(this.dragBox).eq(boxIdx);
 
-            var offsetY = $(this.dropArea).data("offset-y");
-            if (typeof(offsetY) == 'undefined') offsetY = 0;
 
-            var boxOffsetY = b.data("offset-y");
-            if (typeof(boxOffsetY) == 'undefined') boxOffsetY = 0;
+        if (this.dropType == 'scale') {
 
-            b.css({
-                left : (c.position().left + $(this.dropArea).position().left)/zoom,
-                top : (c.position().top + $(this.dropArea).position().top)/zoom + boxOffsetY + offsetY
-            });
+            var ds = c.find(".drop_space");
+            for (var j = 0; j < ds.length; j++) {
+                var boxIdx = $(ds[j]).data("bind-box-idx");
+                var b = $(this.dragBox).eq(boxIdx);
+                var offsetY = $(this.dropArea).data("offset-y");
+                if (typeof(offsetY) == 'undefined') offsetY = 0;
+    
+                var boxOffsetY = b.data("offset-y");
+                if (typeof(boxOffsetY) == 'undefined') boxOffsetY = 0;
 
-            b.rotate(deg);
+                var cLeft_org = $(ds[j]).position().left + $(this.dropArea).position().left + $(this.dropArea).find(".drop_container_right").position().left - 10/zoom;
+                var cTop_org = $(ds[j]).position().top + $(this.dropArea).position().top + $(this.dropArea).find(".drop_container_right").position().top + 10/zoom;
+                var cLeft = cLeft_org /zoom; 
+                var cTop = cTop_org /zoom + offsetY;
 
+                $(ds[j]).data("bind-box-idx");
+
+                b.css({
+                    left : cLeft,
+                    top : cTop + boxOffsetY
+                });
+            }
+
+        } else {
+            var boxIdx = c.data("bind-box-idx");
+            if (typeof(boxIdx) != 'undefined') {
+                var b = $(this.dragBox).eq(boxIdx);
+    
+                var offsetY = $(this.dropArea).data("offset-y");
+                if (typeof(offsetY) == 'undefined') offsetY = 0;
+    
+                var boxOffsetY = b.data("offset-y");
+                if (typeof(boxOffsetY) == 'undefined') boxOffsetY = 0;
+    
+                b.css({
+                    left : (c.position().left + $(this.dropArea).position().left)/zoom,
+                    top : (c.position().top + $(this.dropArea).position().top)/zoom + boxOffsetY + offsetY
+                });
+                b.rotate(deg);
+                
+            }
         }
+
+
+
+        
     }
 
 };
