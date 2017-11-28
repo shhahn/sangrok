@@ -252,6 +252,7 @@ CRotateDragDrop.prototype.onTouchEnd = function(event) {
     if (this.curDragBoxIdx == -1) return;
     
     var isMagnetic = false;
+    var magnaticPos = new Array();
     var containers = dropArea.find('.drop_container');
 
     for (var i = 0; i < containers.length; i++) {
@@ -334,9 +335,16 @@ CRotateDragDrop.prototype.onTouchEnd = function(event) {
                     }
                 }
 
-                if (j == this.curDragBoxPos.length) {
+                // 박스는 들어갈수있는 컨테이너에만 들어갈수있음 
+                var isLeft = this.curDragBox.hasClass("drag_box_left") && $(e).hasClass("drop_container_left");
+                var isRight = this.curDragBox.hasClass("drag_box_right") && $(e).hasClass("drop_container_right");
+
+                if (j == this.curDragBoxPos.length && (isLeft || isRight)) {
                     isMagnetic = true
                 }
+
+                
+                
             }
 
             if (isMagnetic) {
@@ -344,27 +352,64 @@ CRotateDragDrop.prototype.onTouchEnd = function(event) {
                 var boxOffsetY = this.curDragBox.data("offset-y");
                 if (typeof(boxOffsetY) == 'undefined') boxOffsetY = 0;
 
-                this.curDragBoxPos[this.curDragBoxIdx].left = cLeft;
-                this.curDragBoxPos[this.curDragBoxIdx].top = cTop + boxOffsetY;
-
-                $(e).data("bind-box-idx", self.curDragBoxIdx);
-                this.curDragBox.data("bind-container-idx", i);
-
-                this.curDragBox.animate({
-                    left: cLeft,
-                    top: cTop + boxOffsetY,
-                }, function(){
-                    //self.curDragBox.css({left:$(e).position().left, top:$(e).position().top + boxOffsetY/zoom});
-                    //$(e).append(self.curDragBox);
-                    self.decision();
+                magnaticPos.push({
+                    left : cLeft,
+                    top : cTop + boxOffsetY,
+                    idx : i,
+                    container : e
                 });
-                break;
+
+                
+                //break;
             }
 
 
         }
 
     }
+
+
+    if (isMagnetic) {
+
+  
+        var posidx = 0;
+
+        // 매칭된 컨테이너가 2개 이상이면 좌우 어디에 넣을지 정함
+        if (magnaticPos.length > 1) {
+            var dcenter = dLeft; // 이미 중앙값 보정 된듯?
+            
+            var leftMagnetic = dcenter - magnaticPos[0].left;
+            var rightMagnetic = magnaticPos[1].left - dcenter;
+
+            //console.log(dcenter + " " + magnaticPos[0].left + " " +  magnaticPos[1].left + " " + leftMagnetic + " " + rightMagnetic);
+            if (rightMagnetic < leftMagnetic) {
+                posidx = 1;
+            }
+        }
+
+        
+
+        var mleft = magnaticPos[posidx].left;
+        var mtop = magnaticPos[posidx].top;
+        var midx = magnaticPos[posidx].idx;
+        var c = magnaticPos[posidx].container;
+
+        this.curDragBoxPos[this.curDragBoxIdx].left = mleft;
+        this.curDragBoxPos[this.curDragBoxIdx].top = mtop;
+
+        $(c).data("bind-box-idx", self.curDragBoxIdx);
+        this.curDragBox.data("bind-container-idx", midx);
+
+        this.curDragBox.animate({
+            left: mleft,
+            top: mtop,
+        }, function(){
+            //self.curDragBox.css({left:$(e).position().left, top:$(e).position().top + boxOffsetY/zoom});
+            //$(e).append(self.curDragBox);
+            self.decision();
+        });
+    }
+
 
     // 붙은게 없으면 원복
     if (!isMagnetic) {
