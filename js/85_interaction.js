@@ -63,7 +63,7 @@
         el.removeClass("btn1_inner_mid");
         el.removeClass("btn1_inner_bottom");
         el.removeClass("btn1_outer_top");
-        el.removeClass("btn1_outer_top");
+        el.removeClass("btn1_outer_mid");
 
         el.removeClass("btn2_inner_mid");
         el.removeClass("btn2_inner_bottom");
@@ -108,23 +108,27 @@
                 img.attr("src", "images/85/b85_01_03.png");
                 resetBtnPos(btn1).addClass("btn1_outer_top");
                 resetBtnPos(btn2).addClass("btn2_inner_bottom");
-                //btn1.offset({left:pos_btnleft_outer, top:pos_btn1_top_outer}); 
-                //btn2.offset({top:pos_btn1_bottom_inner}); 
                 break;
             case "images/85/b85_01_02.png":
                 img.attr("src", "images/85/b85_01_04.png");
-                btn1.offset({left:pos_btnleft_outer, top:pos_btn1_middle}); 
-                btn2.offset({top:pos_btn1_middle}); 
+                resetBtnPos(btn1).addClass("btn1_outer_mid");
+                resetBtnPos(btn2).addClass("btn2_outer_mid");
+                //btn1.offset({left:pos_btnleft_outer, top:pos_btn1_middle}); 
+                //btn2.offset({top:pos_btn1_middle}); 
                 break;
             case "images/85/b85_01_03.png":
                 img.attr("src", "images/85/b85_01_01.png");
-                btn1.offset({left:pos_btnleft_inner, top:pos_btn1_middle}); 
-                btn2.offset({top:pos_btn1_middle}); 
+                //btn1.offset({left:pos_btnleft_inner, top:pos_btn1_middle}); 
+                //btn2.offset({top:pos_btn1_middle}); 
+                resetBtnPos(btn1).addClass("btn1_inner_mid");
+                resetBtnPos(btn2).addClass("btn2_inner_mid");
                 break;
             case "images/85/b85_01_04.png":
                 img.attr("src", "images/85/b85_01_02.png");
-                btn1.offset({left:pos_btnleft_inner, top:pos_btn1_bottom_inner}); 
-                btn2.offset({top:pos_btn1_top_outer}); 
+                //btn1.offset({left:pos_btnleft_inner, top:pos_btn1_bottom_inner}); 
+                //btn2.offset({top:pos_btn1_top_outer}); 
+                resetBtnPos(btn1).addClass("btn1_inner_bottom");
+                resetBtnPos(btn2).addClass("btn2_outer_top");
                 break;
         }
 
@@ -139,23 +143,31 @@
         switch (curImgSrc) {
             case "images/85/b85_01_01.png": 
                 img.attr("src", "images/85/b85_01_02.png"); 
-                btn2.offset({left:pos_btnright_outer, top:pos_btn1_top_outer}); 
-                btn1.offset({top:pos_btn1_bottom_inner}); 
+                //btn2.offset({left:pos_btnright_outer, top:pos_btn1_top_outer}); 
+                //btn1.offset({top:pos_btn1_bottom_inner});
+                resetBtnPos(btn2).addClass("btn2_outer_top");
+                resetBtnPos(btn1).addClass("btn1_inner_bottom");
                 break;
             case "images/85/b85_01_02.png":
                 img.attr("src", "images/85/b85_01_01.png");
-                btn2.offset({left:pos_btnright_inner, top:pos_btn1_middle}); 
-                btn1.offset({top:pos_btn1_middle}); 
+                //btn2.offset({left:pos_btnright_inner, top:pos_btn1_middle}); 
+                //btn1.offset({top:pos_btn1_middle}); 
+                resetBtnPos(btn2).addClass("btn2_inner_mid");
+                resetBtnPos(btn1).addClass("btn1_inner_mid");
                 break;
             case "images/85/b85_01_03.png":
                 img.attr("src", "images/85/b85_01_04.png");
-                btn2.offset({left:pos_btnright_outer, top:pos_btn1_middle}); 
-                btn1.offset({top:pos_btn1_middle}); 
+                //btn2.offset({left:pos_btnright_outer, top:pos_btn1_middle}); 
+                //btn1.offset({top:pos_btn1_middle}); 
+                resetBtnPos(btn2).addClass("btn2_outer_mid");
+                resetBtnPos(btn1).addClass("btn1_outer_mid");
                 break;
             case "images/85/b85_01_04.png":
                 img.attr("src", "images/85/b85_01_03.png");
-                btn2.offset({left:pos_btnright_inner, top:pos_btn1_bottom_inner}); 
-                btn1.offset({top:pos_btn1_top_outer}); 
+                //btn2.offset({left:pos_btnright_inner, top:pos_btn1_bottom_inner}); 
+                //btn1.offset({top:pos_btn1_top_outer}); 
+                resetBtnPos(btn2).addClass("btn2_inner_bottom");
+                resetBtnPos(btn1).addClass("btn1_outer_top");
                 break;
         }
 
@@ -172,23 +184,27 @@
         switch (curImgSrc) {
             case "images/85/b85_02_01.png": 
                 img.attr("src", "images/85/b85_02_02.png"); 
-                btn3.offset({left:pos_btnleft_outer, top:pos_btn3_top_outer}); 
-                btn4.offset({top:pos_btn3_bottom_outer}); 
+                //btn3.offset({left:pos_btnleft_outer, top:pos_btn3_top_outer}); 
+                //btn4.offset({top:pos_btn3_bottom_outer}); 
+                resetBtnPos(btn3).addClass("btn3_outer_top");
+                resetBtnPos(btn4).addClass("btn4_outer_bottom");
                 break;
             case "images/85/b85_02_02.png":
                 img.attr("src", "images/85/b85_02_01.png");
-                btn3.offset({left:pos_btnleft_inner, top:pos_btn3_middle}); 
-                btn4.offset({top:pos_btn3_middle}); 
+                //btn3.offset({left:pos_btnleft_inner, top:pos_btn3_middle}); 
+                //btn4.offset({top:pos_btn3_middle}); 
+                resetBtnPos(btn3).addClass("btn3_inner_mid");
+                resetBtnPos(btn4).addClass("btn4_outer_mid");
                 break;
             case "images/85/b85_02_03.png":
                 img.attr("src", "images/85/b85_02_04.png");
-                btn3.offset({left:pos_btnleft_inner, top:pos_btn3_top_inner}); 
-                //btn4.css({top:pos_btn1_middle}); 
+                //btn3.offset({left:pos_btnleft_inner, top:pos_btn3_top_inner}); 
+                resetBtnPos(btn3).addClass("btn3_inner_top");
                 break;
             case "images/85/b85_02_04.png":
                 img.attr("src", "images/85/b85_02_03.png");
-                btn3.offset({left:pos_btnleft_outer, top:pos_btn3_top_outer}); 
-                //btn4.css({top:pos_btn3_top_outer}); 
+                //btn3.offset({left:pos_btnleft_outer, top:pos_btn3_top_outer}); 
+                resetBtnPos(btn3).addClass("btn3_outer_top");
                 break;
         }
 
@@ -203,23 +219,29 @@
         switch (curImgSrc) {
             case "images/85/b85_02_01.png": 
                 img.attr("src", "images/85/b85_02_04.png"); 
-                btn4.offset({left:pos_btnright_inner, top:pos_btn3_bottom_inner}); 
-                btn3.offset({top:pos_btn3_top_inner}); 
+                //btn4.offset({left:pos_btnright_inner, top:pos_btn3_bottom_inner}); 
+                //btn3.offset({top:pos_btn3_top_inner}); 
+                resetBtnPos(btn4).addClass("btn4_inner_bottom");
+                resetBtnPos(btn3).addClass("btn3_inner_top");
                 break;
             case "images/85/b85_02_02.png":
                 img.attr("src", "images/85/b85_02_03.png");
-                btn4.offset({left:pos_btnright_inner, top:pos_btn3_bottom_inner}); 
+                //btn4.offset({left:pos_btnright_inner, top:pos_btn3_bottom_inner}); 
+                resetBtnPos(btn4).addClass("btn4_inner_bottom");
                 //btn1.css({top:pos_btn1_middle}); 
                 break;
             case "images/85/b85_02_03.png":
                 img.attr("src", "images/85/b85_02_02.png");
-                btn4.offset({left:pos_btnright_outer, top:pos_btn3_bottom_outer}); 
+                //btn4.offset({left:pos_btnright_outer, top:pos_btn3_bottom_outer}); 
+                resetBtnPos(btn4).addClass("btn4_outer_bottom");
                 //btn1.css({top:pos_btn1_middle}); 
                 break;
             case "images/85/b85_02_04.png":
                 img.attr("src", "images/85/b85_02_01.png");
-                btn4.offset({left:pos_btnright_outer, top:pos_btn3_middle}); 
-                btn3.offset({top:pos_btn3_middle}); 
+                //btn4.offset({left:pos_btnright_outer, top:pos_btn3_middle}); 
+                //btn3.offset({top:pos_btn3_middle}); 
+                resetBtnPos(btn4).addClass("btn4_outer_mid");
+                resetBtnPos(btn3).addClass("btn3_inner_mid");
                 break;
         }
 
