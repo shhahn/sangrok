@@ -3,13 +3,25 @@
 .container{position:relative; width: 100%; height: 100%;}
 
 /* 버튼 레이아웃 */
-.btn:nth-child(1){top:330px;left:246px;} /*클릭*/
-.btn:nth-child(2){top:330px;left:434px;} /*클릭*/
-.btn:nth-child(3){top:554px;left:246px;} /*클릭*/
-.btn:nth-child(4){top:554px;left:496px;} /*클릭*/
 .btn:nth-child(5){top:899px;left:327px;} /*실험관찰*/
 
+.btn1_inner_mid {top:330px;left:246px;} /*  */
+.btn1_inner_bottom {top:345px;left:246px;} /*  */
+.btn1_outer_top {top:305px;left:176px;} /*  */
+.btn1_outer_mid {top:330px;left:176px;} /*  */
 
+.btn2_inner_mid {top:330px;left:434px;} /*  */ 
+.btn2_inner_bottom {top:345px;left:434px;} /*  */ 
+.btn2_outer_mid {top:330px;left:496px;} /*  */
+.btn2_outer_top {top:305px;left:496px;} /*  */ 
+
+.btn3_inner_mid {top:554px;left:246px;} /*  */
+.btn3_inner_top {top:529px;left:246px;} /*  */
+.btn3_outer_top {top:529px;left:176px;} /*  */
+
+.btn4_inner_bottom {top:569px;left:426px;} /*  */
+.btn4_outer_mid {top:554px;left:496px;} /*  */
+.btn4_outer_bottom {top:579px;left:496px;} /*  */
 
 /*
     .btn-dummy:nth-child(1){top:330px;left:246px;}

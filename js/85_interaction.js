@@ -59,6 +59,28 @@
     var pos_btn3_bottom_outer = 0;
 
 
+    function resetBtnPos(el) {
+        el.removeClass("btn1_inner_mid");
+        el.removeClass("btn1_inner_bottom");
+        el.removeClass("btn1_outer_top");
+        el.removeClass("btn1_outer_top");
+
+        el.removeClass("btn2_inner_mid");
+        el.removeClass("btn2_inner_bottom");
+        el.removeClass("btn2_outer_mid");
+        el.removeClass("btn2_outer_top");
+
+        el.removeClass("btn3_inner_mid");
+        el.removeClass("btn3_inner_top");
+        el.removeClass("btn3_outer_top");
+
+        el.removeClass("btn4_inner_bottom");
+        el.removeClass("btn4_outer_mid");
+        el.removeClass("btn4_outer_bottom");
+
+        return el;
+    }
+
     /**
      * 같은 몸무게 이미지
      */
@@ -83,9 +105,11 @@
 
         switch (curImgSrc) {
             case "images/85/b85_01_01.png": 
-                img.attr("src", "images/85/b85_01_03.png"); 
-                btn1.offset({left:pos_btnleft_outer, top:pos_btn1_top_outer}); 
-                btn2.offset({top:pos_btn1_bottom_inner}); 
+                img.attr("src", "images/85/b85_01_03.png");
+                resetBtnPos(btn1).addClass("btn1_outer_top");
+                resetBtnPos(btn2).addClass("btn2_inner_bottom");
+                //btn1.offset({left:pos_btnleft_outer, top:pos_btn1_top_outer}); 
+                //btn2.offset({top:pos_btn1_bottom_inner}); 
                 break;
             case "images/85/b85_01_02.png":
                 img.attr("src", "images/85/b85_01_04.png");
