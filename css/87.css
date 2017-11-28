@@ -45,10 +45,11 @@
 
 .imgbox{position: absolute;}
 .imgbox.img01{top: -30px; left: 428px; width: 340px; height: 340px; background: url(../images/87/b87_05_01.png) 0 0 no-repeat; background-size: contain;}
-.imgbox.img02{top: 64px; left: 458px; width: 249px; height: 30px; background: url(../images/87/b87_05_02.png) 0 0 no-repeat; background-size: contain;}
+.imgbox.img02{top: 0px; left: 0px; width: 249px; height: 30px; background: url(../images/87/b87_05_02.png) 0 0 no-repeat; background-size: contain;}
+.drop_area{position: absolute; top: 64px; left: 458px; width: 249px; height: 30px;}
 .imgbox.img03{top: -30px; left: 428px; width: 340px; height: 340px; background: url(../images/87/b87_05_03.png) 0 0 no-repeat; background-size: contain;}
-.imgbox.img04{top: 90px; left: 442px; width: 64px; height: 115px; background: url(../images/87/b87_05_04.png) 0 0 no-repeat; background-size: contain;}
-.imgbox.img05{top: 89px; left: 658px; width: 64px; height: 115px; background: url(../images/87/b87_05_05.png) 0 0 no-repeat; background-size: contain;}
+.imgbox.img04{top: 30px; left: -16px; width: 64px; height: 115px; background: url(../images/87/b87_05_04.png) 0 0 no-repeat; background-size: contain;}
+.imgbox.img05{top: 30px; left: 200px; width: 64px; height: 115px; background: url(../images/87/b87_05_05.png) 0 0 no-repeat; background-size: contain;}
 .imgbox.img06{top: 251px; left: 634px; width: 11px; height: 11px; background: url(../images/87/b87_05_06.png) 0 0 no-repeat; background-size: contain;}
 .imgbox.img07{top: 251px; left: 650px; width: 11px; height: 11px; background: url(../images/87/b87_05_06.png) 0 0 no-repeat; background-size: contain;}
 .imgbox.img08{top: 251px; left: 666px; width: 11px; height: 11px; background: url(../images/87/b87_05_06.png) 0 0 no-repeat; background-size: contain;}

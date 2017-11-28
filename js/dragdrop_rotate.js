@@ -28,6 +28,11 @@ function CRotateDragDrop(info) {
 
     $(this.dropArea).off('click');
 
+    //var sl = $(this.dropArea).find(".scale_left");
+    ///var sr = $(this.dropArea).find(".scale_right");
+
+    //sl.data("org-top",sl.position().top);
+    //sr.data("org-top",sr.position().top);
    
 
     $(this.dragBox).each(function (i, e) {
@@ -399,15 +404,24 @@ CRotateDragDrop.prototype.decision = function() {
     for (var i = 0; i < cL.length; i++) {
 
         var container = $(cL[i]);
-        var boxIdx = container.data("bind-box-idx");
-        if (typeof(boxIdx) != 'undefined') {
-            
-            var cw = container.data("weight");
-            var bw = $(this.dragBox).eq(boxIdx).data("weight");
 
-            sumLeft += cw*bw;
+        if (this.dropType == 'scale') {
 
+            var cw = container.find(".drop_dummy").data("weight");
+            sumLeft += cw;
+        } else {
+            var boxIdx = container.data("bind-box-idx");
+            if (typeof(boxIdx) != 'undefined') {
+                
+                var cw = container.data("weight");
+                var bw = $(this.dragBox).eq(boxIdx).data("weight");
+    
+                sumLeft += cw*bw;
+    
+            }
         }
+
+        
 
     }
 
@@ -416,16 +430,28 @@ CRotateDragDrop.prototype.decision = function() {
     for (var i = 0; i < cR.length; i++) {
 
         var container = $(cR[i]);
-        var boxIdx = container.data("bind-box-idx");
-        if (typeof(boxIdx) != 'undefined') {
-            
-            var cw = container.data("weight");
-            var bw = $(this.dragBox).eq(boxIdx).data("weight");
 
-            sumRight += cw*bw;
+        if (this.dropType == 'scale') {
+            var ds = container.find(".drop_space");
+            for (var j = 0; j < ds.length; j++) {
+                var bidx = $(ds[j]).data("bind-box-idx");
+                if (typeof(bidx) != 'undefined') {
+                    var sw = $(ds[j]).data("weight");
+                    sumRight += sw;
+                }
+            }
 
-        }
-
+        } else {
+            var boxIdx = container.data("bind-box-idx");
+            if (typeof(boxIdx) != 'undefined') {
+                
+                var cw = container.data("weight");
+                var bw = $(this.dragBox).eq(boxIdx).data("weight");
+    
+                sumRight += cw*bw;
+    
+            }
+        }        
     }
 
 
@@ -451,19 +477,35 @@ CRotateDragDrop.prototype.decision = function() {
  */
 CRotateDragDrop.prototype.rotate = function(deg) {
 
+    console.log(this.curDeg);
+    console.log(deg);
+
     var self = this;
     var degDiff = deg != this.curDeg;
     if (degDiff) {
   
-        $(this.dropArea).rotate({
-            angle: this.curDeg,
-            animateTo:deg,
-            easing : function(x, t, b, c, d) { 
-                var r = b+(t/d)*c;
-                self.correct(r);
-                return r; 
-            }
-        });
+        if (this.dropType == 'scale') {
+            $(this.dropArea).find(".scale_bar").rotate({
+                angle: this.curDeg,
+                animateTo:deg,
+                easing : function(x, t, b, c, d) { 
+                    var r = b+(t/d)*c;
+                    self.correct(r);
+                    return r; 
+                }
+            });
+        } else {
+            $(this.dropArea).rotate({
+                angle: this.curDeg,
+                animateTo:deg,
+                easing : function(x, t, b, c, d) { 
+                    var r = b+(t/d)*c;
+                    self.correct(r);
+                    return r; 
+                }
+            });
+        }
+        
 
         this.curDeg = deg;
 
@@ -489,6 +531,38 @@ CRotateDragDrop.prototype.correct = function(deg) {
 
         if (this.dropType == 'scale') {
 
+            var degToPx = 1.5; // 각도에 의한 임의의 보정치
+
+            var sl = $(this.dropArea).find(".scale_left");
+            var sr = $(this.dropArea).find(".scale_right");
+
+            var slOrg = sl.data("org-top");
+            var srOrg = sr.data("org-top");
+
+            var sb = $(this.dropArea).find(".scale_bar");
+            var angle = sb.getRotateAngle();
+            
+            var fix = angle[0]*degToPx/zoom;
+            //if (fix < 0) fix = fix*-1;
+            
+            var fixLeft = fix;
+            var fixRight = fix;
+            if (this.curDeg > 0) {
+                fixLeft = -(fixLeft);
+            } else {
+                fixRight = -(fixRight);
+            }
+
+            var sltop = slOrg - fix;
+            var srtop = srOrg + fix;
+
+            //console.log(angle[0]);
+            console.log(fix);
+
+            sl.css({top:sltop});
+            sr.css({top:srtop});
+
+
             var ds = c.find(".drop_space");
             for (var j = 0; j < ds.length; j++) {
                 var boxIdx = $(ds[j]).data("bind-box-idx");
@@ -506,10 +580,23 @@ CRotateDragDrop.prototype.correct = function(deg) {
 
                 $(ds[j]).data("bind-box-idx");
 
-                b.css({
-                    left : cLeft,
-                    top : cTop + boxOffsetY
-                });
+                
+                if (typeof(boxIdx) != 'undefined') {
+                    
+                    b.css({
+                        left : cLeft,
+                        top : cTop + boxOffsetY
+                    });
+    
+    
+                    var btop =  b.position().top + deg/degToPx/zoom;
+    
+                    //console.log(cTop + boxOffsetY);
+                    //console.log(btop);
+    
+                    b.css({top:btop});
+                }
+                
             }
 
         } else {
