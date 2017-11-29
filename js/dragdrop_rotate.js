@@ -29,12 +29,12 @@ function CRotateDragDrop(info) {
     $(this.dropArea).off('click');
 
     if (this.dropType == 'scale') {
-        setTimeout(function(){
+        //setTimeout(function(){
             var sl = $(self.dropArea).find(".scale_left");
             var sr = $(self.dropArea).find(".scale_right");
             sl.data("org-top",sl.position().top/zoom);
             sr.data("org-top",sr.position().top/zoom);
-        }, 500);
+        //}, 500);
         
     }
     
@@ -528,13 +528,22 @@ CRotateDragDrop.prototype.decision = function() {
 
 
     var deg;
-    if (sumLeft < sumRight) {
-        deg = 5;
-    } else if (sumLeft > sumRight) {
-        deg = -5;
+
+    
+
+    if (this.dropType == 'scale') {
+
+        var rVar = 8.75;
+        deg = (sumRight-sumLeft)/rVar;
     } else {
-        deg = 0;
-    }
+        if (sumLeft < sumRight) {
+            deg = 5;
+        } else if (sumLeft > sumRight) {
+            deg = -5;
+        } else {
+            deg = 0;
+        }
+    }    
 
     this.rotate(deg);
     this.correct(deg);

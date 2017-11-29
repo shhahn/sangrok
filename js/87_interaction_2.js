@@ -13,7 +13,9 @@
                 wrap : '.container'
             });
 
-            console.log(rdd);
+            rdd.decision();
+
+            //console.log(rdd);
 
         }, 500);
 
