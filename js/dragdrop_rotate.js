@@ -588,8 +588,8 @@ CRotateDragDrop.prototype.correct = function(deg) {
 
 
         if (this.dropType == 'scale') {
-
-            var degToPx = 2.3*zoom; // 각도에 의한 임의의 보정치
+            
+            var degToPx = $(this.dropArea).find(".degFixForZoom").width()/zoom; // 각도에 의한 임의의 보정치
 
             var sl = $(this.dropArea).find(".scale_left");
             var sr = $(this.dropArea).find(".scale_right");
