@@ -28,12 +28,13 @@ function CRotateDragDrop(info) {
 
     $(this.dropArea).off('click');
 
-    //var sl = $(this.dropArea).find(".scale_left");
-    ///var sr = $(this.dropArea).find(".scale_right");
-
-    //sl.data("org-top",sl.position().top);
-    //sr.data("org-top",sr.position().top);
-   
+    if (this.dropType == 'scale') {
+        var sl = $(this.dropArea).find(".scale_left");
+        var sr = $(this.dropArea).find(".scale_right");
+        sl.data("org-top",sl.position().top);
+        sr.data("org-top",sr.position().top);
+    }
+    
 
     $(this.dragBox).each(function (i, e) {
         self.orgDragBoxPos.push($(e).position()); // 좌표 복원용 (원래 있던자리)
@@ -588,7 +589,7 @@ CRotateDragDrop.prototype.correct = function(deg) {
 
         if (this.dropType == 'scale') {
 
-            var degToPx = 1.5; // 각도에 의한 임의의 보정치
+            var degToPx = 2.3; // 각도에 의한 임의의 보정치
 
             var sl = $(this.dropArea).find(".scale_left");
             var sr = $(this.dropArea).find(".scale_right");
@@ -599,26 +600,17 @@ CRotateDragDrop.prototype.correct = function(deg) {
             var sb = $(this.dropArea).find(".scale_bar");
             var angle = sb.getRotateAngle();
             
-            var fix = angle[0]*degToPx/zoom;
-            //if (fix < 0) fix = fix*-1;
+            var fix = angle[0]*degToPx*zoom;
             
-            var fixLeft = fix;
-            var fixRight = fix;
-            if (this.curDeg > 0) {
-                fixLeft = -(fixLeft);
-            } else {
-                fixRight = -(fixRight);
-            }
 
             var sltop = slOrg - fix;
             var srtop = srOrg + fix;
 
             //console.log(angle[0]);
-            console.log(fix);
+            //console.log(fix + " " + sltop + " " + srtop);
 
             sl.css({top:sltop});
             sr.css({top:srtop});
-
 
             var ds = c.find(".drop_space");
             for (var j = 0; j < ds.length; j++) {
@@ -635,23 +627,23 @@ CRotateDragDrop.prototype.correct = function(deg) {
                 var cLeft = cLeft_org /zoom; 
                 var cTop = cTop_org /zoom + offsetY;
 
-                $(ds[j]).data("bind-box-idx");
+                //$(ds[j]).data("bind-box-idx");
 
                 
                 if (typeof(boxIdx) != 'undefined') {
                     
                     b.css({
                         left : cLeft,
-                        top : cTop + boxOffsetY
+                        top : cTop + boxOffsetY + fix
                     });
     
     
-                    var btop =  b.position().top + deg/degToPx/zoom;
+                    //var btop =  b.position().top + deg/degToPx/zoom;
     
                     //console.log(cTop + boxOffsetY);
                     //console.log(btop);
     
-                    b.css({top:btop});
+                    //b.css({top:btop});
                 }
                 
             }
