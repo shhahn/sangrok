@@ -158,13 +158,6 @@ CRotateDragDrop.prototype.moveDragBox = function(el,x,y,type){
 };
 
 
-function boxArea(tg,area){
-    info.itembox[0] = $(tg).position().left / zoomViews;
-    info.itembox[1] = $(tg).position().top / zoomViews;
-    
-}
-
-
 
 
 /**
@@ -200,7 +193,12 @@ CRotateDragDrop.prototype.onTouchStart = function(e) {
 
             var cidx = el.data("bind-container-idx");
             el.removeData("bind-container-idx");
-            $(this.dropArea).find(".drop_container").eq(cidx).removeData("bind-box-idx");
+            if (this.dropType == 'scale') {
+                $(this.dropArea).find(".drop_container").find(".drop_space").eq(cidx).removeData("bind-box-idx");
+            } else {
+                $(this.dropArea).find(".drop_container").eq(cidx).removeData("bind-box-idx");
+            }
+            
 
             break;
         }
@@ -335,7 +333,7 @@ CRotateDragDrop.prototype.onTouchEnd = function(event) {
                         cLeft = cLeft_org /zoom + offsetX; 
                         cTop = cTop_org /zoom + offsetY; 
 
-
+                        this.curDragBox.data("bind-container-idx", j);
                         $(ds[j]).data("bind-box-idx", this.curDragBoxIdx);
 
                         isMagnetic = true;
@@ -417,16 +415,26 @@ CRotateDragDrop.prototype.onTouchEnd = function(event) {
         this.curDragBoxPos[this.curDragBoxIdx].top = mtop;
 
         $(c).data("bind-box-idx", self.curDragBoxIdx);
-        this.curDragBox.data("bind-container-idx", midx);
+        if (this.dropType=='scale') {
+            //this.curDragBox.data("bind-container-idx", midx);
+        } else {
+            this.curDragBox.data("bind-container-idx", midx);
+        }
+        
 
-        this.curDragBox.animate({
-            left: mleft,
-            top: mtop,
-        }, function(){
-            //self.curDragBox.css({left:$(e).position().left, top:$(e).position().top + boxOffsetY/zoom});
-            //$(e).append(self.curDragBox);
+        if (this.dropType == 'scale') {
             self.decision();
-        });
+        } else {
+            this.curDragBox.animate({
+                left: mleft,
+                top: mtop,
+            }, function(){
+                //self.curDragBox.css({left:$(e).position().left, top:$(e).position().top + boxOffsetY/zoom});
+                //$(e).append(self.curDragBox);
+                self.decision();
+            });
+        }
+        
     }
 
 
