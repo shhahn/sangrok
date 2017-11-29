@@ -640,13 +640,10 @@ CRotateDragDrop.prototype.correct = function(deg) {
                         top : cTop + boxOffsetY + fix
                     });
     
+                    this.curDragBoxPos[boxIdx].left = b.position().left;
+                    this.curDragBoxPos[boxIdx].top = b.position().top;
     
-                    //var btop =  b.position().top + deg/degToPx/zoom;
-    
-                    //console.log(cTop + boxOffsetY);
-                    //console.log(btop);
-    
-                    //b.css({top:btop});
+                    
                 }
                 
             }
@@ -666,10 +663,18 @@ CRotateDragDrop.prototype.correct = function(deg) {
                     left : (c.position().left + $(this.dropArea).position().left)/zoom,
                     top : (c.position().top + $(this.dropArea).position().top)/zoom + boxOffsetY + offsetY
                 });
+
+                this.curDragBoxPos[boxIdx].left = b.position().left;
+                this.curDragBoxPos[boxIdx].top = b.position().top;
+
                 b.rotate(deg);
                 
             }
         }
+
+
+        
+        
 
 
 
