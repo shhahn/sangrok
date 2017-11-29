@@ -622,8 +622,8 @@ CRotateDragDrop.prototype.correct = function(deg) {
                 var boxOffsetY = b.data("offset-y");
                 if (typeof(boxOffsetY) == 'undefined') boxOffsetY = 0;
 
-                var cLeft_org = $(ds[j]).position().left + $(this.dropArea).position().left + $(this.dropArea).find(".drop_container_right").position().left - 10/zoom;
-                var cTop_org = $(ds[j]).position().top + $(this.dropArea).position().top + $(this.dropArea).find(".drop_container_right").position().top + 10/zoom;
+                var cLeft_org = $(ds[j]).position().left + $(this.dropArea).position().left + $(this.dropArea).find(".drop_container_right").position().left - 10*zoom;
+                var cTop_org = $(ds[j]).position().top + $(this.dropArea).position().top + $(this.dropArea).find(".drop_container_right").position().top + 10*zoom;
                 var cLeft = cLeft_org /zoom; 
                 var cTop = cTop_org /zoom + offsetY;
 
