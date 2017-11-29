@@ -277,22 +277,37 @@ CRotateDragDrop.prototype.onTouchEnd = function(event) {
         var dLeft = this.curPos.left;
         var dTop = this.curPos.top;
 
-
-        
-
-
-
         
         if (typeof(this.curDragBox) == 'undefined') return;
 
-        
+
+        // 충돌 영역 
+        var crashLeft = dLeft;
+        var crashTop = dTop;
+        var crashRight = dLeft + this.curDragBox.width();
+        var crashBottom = dTop + this.curDragBox.height();
+
+        // 임의의 충돌영역 설정
+        if (typeof(this.curDragBox.data("crash-area"))!='undefined') {
+            var crashArea = this.curDragBox.find(".drag_box_crash");
+            
+            crashLeft += crashArea.position().left;
+            crashTop += crashArea.position().top;
+            crashRight = crashLeft + crashArea.width();
+            crashBottom = crashTop + crashArea.height();
+            //console.log(crashArea.position().left);
+            //console.log(dLeft);
+        }
+
+
+
 
         //console.log("$(e).position().top : " + $(e).position().top + ", $(this.dropArea).position().top : " + $(this.dropArea).position().top);
 
-        if (dLeft > cLeft && dLeft < cLeft + $(e).width()) magneticX = true;
-        if (dLeft + this.curDragBox.width() > cLeft && dLeft + this.curDragBox.width() < cLeft + $(e).width()) magneticX = true;
-        if (dTop > cTop && dTop < cTop + $(e).height()) magneticY = true;
-        if (dTop + this.curDragBox.height() > cTop && dTop + this.curDragBox.height() < cTop + $(e).height()) magneticY = true;
+        if (crashLeft > cLeft && crashLeft < cLeft + $(e).width()) magneticX = true;
+        if (crashRight > cLeft && crashRight < cLeft + $(e).width()) magneticX = true;
+        if (crashTop > cTop && crashTop < cTop + $(e).height()) magneticY = true;
+        if (crashBottom > cTop && crashBottom < cTop + $(e).height()) magneticY = true;
 
         //console.log(dLeft);
         //console.log(dTop);
@@ -521,9 +536,6 @@ CRotateDragDrop.prototype.decision = function() {
  * @param {*} deg 
  */
 CRotateDragDrop.prototype.rotate = function(deg) {
-
-    console.log(this.curDeg);
-    console.log(deg);
 
     var self = this;
     var degDiff = deg != this.curDeg;

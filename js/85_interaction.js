@@ -100,9 +100,6 @@
         var img = $(".img01").find("img");
         var curImgSrc = img.attr("src");
 
-        console.log(e);
-
-
         switch (curImgSrc) {
             case "images/85/b85_01_01.png": 
                 img.attr("src", "images/85/b85_01_03.png");
