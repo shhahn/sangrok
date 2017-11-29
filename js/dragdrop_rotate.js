@@ -600,7 +600,7 @@ CRotateDragDrop.prototype.correct = function(deg) {
             var sb = $(this.dropArea).find(".scale_bar");
             var angle = sb.getRotateAngle();
             
-            var fix = angle[0]*degToPx*zoom;
+            var fix = angle[0]*degToPx;
             
 
             var sltop = slOrg - fix;
