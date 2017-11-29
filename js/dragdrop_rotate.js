@@ -591,6 +591,35 @@ CRotateDragDrop.prototype.rotate = function(deg) {
 
 };
 
+/**
+ * drop_space 영역별 정렬
+ */
+CRotateDragDrop.prototype.sort = function() {
+
+    for (var t = 1; t < 4; t++) {
+        var ds = $(this.dropArea).find(".drop_space_type"+t);
+
+        for (var i = 0; i < ds.length-1; i++) {
+            
+            var bidx1 = $(ds[i]).data("bind-box-idx");
+            var bidx2 = $(ds[i+1]).data("bind-box-idx");
+
+            if (typeof(bidx1) == 'undefined') {
+                $(ds[i]).data("bind-box-idx", bidx2);
+                $(ds[i+1]).removeData("bind-box-idx")
+                if (typeof(bidx2) != 'undefined') {
+                    var cidx = $(this.dropArea).find(".drop_space").index(ds[i]);
+                    $(this.dragBox).eq(bidx2).data("bind-container-idx", cidx);
+                }
+            }
+
+        }
+    }
+
+    
+
+}
+
 CRotateDragDrop.prototype.correct = function(deg) {
 
     var container = $(this.dropArea).find(".drop_container");
@@ -600,6 +629,8 @@ CRotateDragDrop.prototype.correct = function(deg) {
 
         if (this.dropType == 'scale') {
             
+            this.sort();
+
             var degToPx = $(this.dropArea).find(".degFixForZoom").width()/zoom; // 각도에 의한 임의의 보정치
 
             var sl = $(this.dropArea).find(".scale_left");
