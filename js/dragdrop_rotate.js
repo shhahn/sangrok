@@ -32,8 +32,8 @@ function CRotateDragDrop(info) {
         setTimeout(function(){
             var sl = $(self.dropArea).find(".scale_left");
             var sr = $(self.dropArea).find(".scale_right");
-            sl.data("org-top",sl.position().top);
-            sr.data("org-top",sr.position().top);
+            sl.data("org-top",sl.position().top/zoom);
+            sr.data("org-top",sr.position().top/zoom);
         }, 500);
         
     }
