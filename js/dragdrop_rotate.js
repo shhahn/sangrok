@@ -327,7 +327,7 @@ CRotateDragDrop.prototype.onTouchEnd = function(event) {
 
                     if (typeof(boxidx) == 'undefined' && sw == dw) {
 
-                        cLeft_org = $(ds[j]).position().left + $(this.dropArea).position().left + $(this.dropArea).find(".drop_container_right").position().left - 10;
+                        cLeft_org = $(ds[j]).position().left + $(this.dropArea).position().left + $(this.dropArea).find(".drop_container_right").position().left;
                         cTop_org = $(ds[j]).position().top + $(this.dropArea).position().top + $(this.dropArea).find(".drop_container_right").position().top;
                         cLeft = cLeft_org /zoom + offsetX; 
                         cTop = cTop_org /zoom + offsetY; 
@@ -622,7 +622,7 @@ CRotateDragDrop.prototype.correct = function(deg) {
                 var boxOffsetY = b.data("offset-y");
                 if (typeof(boxOffsetY) == 'undefined') boxOffsetY = 0;
 
-                var cLeft_org = $(ds[j]).position().left + $(this.dropArea).position().left + $(this.dropArea).find(".drop_container_right").position().left - 10;
+                var cLeft_org = $(ds[j]).position().left + $(this.dropArea).position().left + $(this.dropArea).find(".drop_container_right").position().left;
                 var cTop_org = $(ds[j]).position().top + $(this.dropArea).position().top + $(this.dropArea).find(".drop_container_right").position().top;
                 var cLeft = cLeft_org /zoom; 
                 var cTop = cTop_org /zoom + offsetY;
