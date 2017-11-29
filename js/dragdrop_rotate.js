@@ -330,7 +330,7 @@ CRotateDragDrop.prototype.onTouchEnd = function(event) {
                         cLeft_org = $(ds[j]).position().left + $(this.dropArea).position().left + $(this.dropArea).find(".drop_container_right").position().left - 10*zoom;
                         cTop_org = $(ds[j]).position().top + $(this.dropArea).position().top + $(this.dropArea).find(".drop_container_right").position().top + 10*zoom;
                         cLeft = cLeft_org /zoom + offsetX; 
-                        cTop = cTop_org /zoom + offsetY; 
+                        cTop = cTop_org /zoom + offsetY*zoom; 
 
 
                         $(ds[j]).data("bind-box-idx", this.curDragBoxIdx);
@@ -625,7 +625,7 @@ CRotateDragDrop.prototype.correct = function(deg) {
                 var cLeft_org = $(ds[j]).position().left + $(this.dropArea).position().left + $(this.dropArea).find(".drop_container_right").position().left - 10*zoom;
                 var cTop_org = $(ds[j]).position().top + $(this.dropArea).position().top + $(this.dropArea).find(".drop_container_right").position().top + 10*zoom;
                 var cLeft = cLeft_org /zoom; 
-                var cTop = cTop_org /zoom + offsetY;
+                var cTop = cTop_org /zoom + offsetY*zoom;
 
                 //$(ds[j]).data("bind-box-idx");
 
