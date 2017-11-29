@@ -327,8 +327,8 @@ CRotateDragDrop.prototype.onTouchEnd = function(event) {
 
                     if (typeof(boxidx) == 'undefined' && sw == dw) {
 
-                        cLeft_org = $(ds[j]).position().left + $(this.dropArea).position().left + $(this.dropArea).find(".drop_container_right").position().left - 10/zoom;
-                        cTop_org = $(ds[j]).position().top + $(this.dropArea).position().top + $(this.dropArea).find(".drop_container_right").position().top + 10/zoom;
+                        cLeft_org = $(ds[j]).position().left + $(this.dropArea).position().left + $(this.dropArea).find(".drop_container_right").position().left - 10*zoom;
+                        cTop_org = $(ds[j]).position().top + $(this.dropArea).position().top + $(this.dropArea).find(".drop_container_right").position().top + 10*zoom;
                         cLeft = cLeft_org /zoom + offsetX; 
                         cTop = cTop_org /zoom + offsetY; 
 
