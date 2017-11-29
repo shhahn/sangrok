@@ -131,8 +131,11 @@ CRotateDragDrop.prototype.moveDragBox = function(el,x,y,type){
     //debug += "<br /> el.position().top : "+ el.position().top;
     //debugView.log(debug);
 
-    if (!el.hasClass("drag_box")) el = el.parents(".drag_box");
-    if (!el.hasClass("drag_box")) return;
+    var strDragBox = this.dragBox.substring(1, this.dragBox.length);
+    
+
+    if (!el.hasClass(strDragBox)) el = el.parents(this.dragBox);
+    if (!el.hasClass(strDragBox)) return;
 
     switch (type) {
         case 'ani':
@@ -165,12 +168,18 @@ CRotateDragDrop.prototype.moveDragBox = function(el,x,y,type){
  */
 CRotateDragDrop.prototype.onTouchStart = function(e) {
 
+    //console.log(this.curDragBoxPos);
+
     var x = e.pageX || e.originalEvent.changedTouches[0].pageX;
     var y = e.pageY || e.originalEvent.changedTouches[0].pageY;
     var el = $(e.target); //.parents(".drag_box");
     
-    if (!el.hasClass("drag_box")) el = el.parents(".drag_box");
-    if (!el.hasClass("drag_box")) return;
+    
+    var strDragBox = this.dragBox.substring(1, this.dragBox.length);
+    
+
+    if (!el.hasClass(strDragBox)) el = el.parents(this.dragBox);
+    if (!el.hasClass(strDragBox)) return;
 
     //el.rotate(0);
     //var debug = "zoomViews : " + zoom;
@@ -180,8 +189,8 @@ CRotateDragDrop.prototype.onTouchStart = function(e) {
     //debug += "<br /> el.position().top : "+ el.position().top;
     //debugView.log(debug);
 
-    //console.log(this.curDragBoxPos);
-    //console.log(x+el.width());
+    console.log(this.curDragBoxPos);
+    console.log(x);
 
     for (var i = 0; i < this.curDragBoxPos.length; i++) {
 
@@ -328,8 +337,8 @@ CRotateDragDrop.prototype.onTouchEnd = function(event) {
 
                     if (typeof(boxidx) == 'undefined' && sw == dw) {
 
-                        cLeft_org = $(ds[j]).position().left + $(this.dropArea).position().left + $(this.dropArea).find(".drop_container_right").position().left;
-                        cTop_org = $(ds[j]).position().top + $(this.dropArea).position().top + $(this.dropArea).find(".drop_container_right").position().top;
+                        cLeft_org = $(ds[j]).position().left + $(this.dropArea).position().left + $(this.dropArea).find(".drop_container").position().left;
+                        cTop_org = $(ds[j]).position().top + $(this.dropArea).position().top + $(this.dropArea).find(".drop_container").position().top;
                         cLeft = cLeft_org /zoom + offsetX; 
                         cTop = cTop_org /zoom + offsetY; 
 
