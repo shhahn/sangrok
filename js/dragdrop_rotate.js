@@ -200,7 +200,15 @@ CRotateDragDrop.prototype.onTouchStart = function(e) {
             var cidx = el.data("bind-container-idx");
             el.removeData("bind-container-idx");
             if (this.dropType == 'scale') {
-                $(this.dropArea).find(".drop_container").find(".drop_space").eq(cidx).removeData("bind-box-idx");
+                var lrPos = el.data("bind-container-pos");
+                if (lrPos == 'left') {
+                    $(this.dropArea).find(".drop_container_left").find(".drop_space").eq(cidx).removeData("bind-box-idx");
+                } else if (lrPos = 'right') {
+                    $(this.dropArea).find(".drop_container_right").find(".drop_space").eq(cidx).removeData("bind-box-idx");
+                } else {
+                    $(this.dropArea).find(".drop_container").find(".drop_space").eq(cidx).removeData("bind-box-idx");
+                }
+                
             } else {
                 $(this.dropArea).find(".drop_container").eq(cidx).removeData("bind-box-idx");
             }
@@ -341,6 +349,11 @@ CRotateDragDrop.prototype.onTouchEnd = function(event) {
                         cTop = cTop_org /zoom + offsetY; 
 
                         this.curDragBox.data("bind-container-idx", j);
+                        if ($(e).hasClass("drop_container_left")) {
+                            this.curDragBox.data("bind-container-pos", 'left');
+                        } else if ($(e).hasClass("drop_container_right")) {
+                            this.curDragBox.data("bind-container-pos", 'right');
+                        }
                         $(ds[j]).data("bind-box-idx", this.curDragBoxIdx);
 
                         isMagnetic = true;
@@ -701,11 +714,18 @@ CRotateDragDrop.prototype.correct = function(deg) {
 
                 
                 if (typeof(boxIdx) != 'undefined') {
+                    if (c.hasClass("drop_container_left")) {
+                        b.css({
+                            left : cLeft,
+                            top : cTop + boxOffsetY - fix
+                        });
+                    } else if (c.hasClass("drop_container_right")) {
+                        b.css({
+                            left : cLeft,
+                            top : cTop + boxOffsetY + fix
+                        });
+                    }
                     
-                    b.css({
-                        left : cLeft,
-                        top : cTop + boxOffsetY + fix
-                    });
     
                     this.curDragBoxPos[boxIdx].left = b.position().left;
                     this.curDragBoxPos[boxIdx].top = b.position().top;
