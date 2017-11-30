@@ -133,7 +133,6 @@ CRotateDragDrop.prototype.moveDragBox = function(el,x,y,type){
 
     var strDragBox = this.dragBox.substring(1, this.dragBox.length);
     
-
     if (!el.hasClass(strDragBox)) el = el.parents(this.dragBox);
     if (!el.hasClass(strDragBox)) return;
 
@@ -188,9 +187,7 @@ CRotateDragDrop.prototype.onTouchStart = function(e) {
     //debug += "<br /> el.position().left : "+ el.position().left;
     //debug += "<br /> el.position().top : "+ el.position().top;
     //debugView.log(debug);
-
-    console.log(this.curDragBoxPos);
-    console.log(x);
+   
 
     for (var i = 0; i < this.curDragBoxPos.length; i++) {
 
@@ -266,6 +263,7 @@ CRotateDragDrop.prototype.onTouchEnd = function(event) {
     var magnaticPos = new Array();
     var containers = dropArea.find('.drop_container');
 
+    //console.log(containers);
     for (var i = 0; i < containers.length; i++) {
 
         var magneticX = false;
@@ -288,7 +286,7 @@ CRotateDragDrop.prototype.onTouchEnd = function(event) {
         var dLeft = this.curPos.left;
         var dTop = this.curPos.top;
 
-        
+
         if (typeof(this.curDragBox) == 'undefined') return;
 
 
@@ -325,7 +323,6 @@ CRotateDragDrop.prototype.onTouchEnd = function(event) {
 
         if (magneticX && magneticY) {
 
-
             if (this.dropType == 'scale') {
             
                 var dw = this.curDragBox.data("weight");
@@ -335,10 +332,11 @@ CRotateDragDrop.prototype.onTouchEnd = function(event) {
                     var sw = $(ds[j]).data("weight");
                     var boxidx = $(ds[j]).data("bind-box-idx");
 
-                    if (typeof(boxidx) == 'undefined' && sw == dw) {
+                    // -1 가중치는 아무거나 다 받는다는 규칙
+                    if (typeof(boxidx) == 'undefined' && (sw == dw || sw == -1)) {
 
-                        cLeft_org = $(ds[j]).position().left + $(this.dropArea).position().left + $(this.dropArea).find(".drop_container").position().left;
-                        cTop_org = $(ds[j]).position().top + $(this.dropArea).position().top + $(this.dropArea).find(".drop_container").position().top;
+                        cLeft_org = $(ds[j]).position().left + $(this.dropArea).position().left + $(e).position().left;
+                        cTop_org = $(ds[j]).position().top + $(this.dropArea).position().top + $(e).position().top;
                         cLeft = cLeft_org /zoom + offsetX; 
                         cTop = cTop_org /zoom + offsetY; 
 
@@ -489,7 +487,18 @@ CRotateDragDrop.prototype.decision = function() {
         if (this.dropType == 'scale') {
 
             var cw = container.find(".drop_dummy").data("weight");
-            sumLeft += cw;
+            if (typeof(cw) != 'undefined') sumLeft += cw;
+
+            var ds = container.find(".drop_space");
+            for (var j = 0; j < ds.length; j++) {
+                var bidx = $(ds[j]).data("bind-box-idx");
+                if (typeof(bidx) != 'undefined') {
+                    var sw = $(this.dragBox).eq(bidx).data("weight");
+                    //var sw = $(ds[j]).data("weight");
+                    sumLeft += sw;
+                }
+            }
+
         } else {
             var boxIdx = container.data("bind-box-idx");
             if (typeof(boxIdx) != 'undefined') {
@@ -517,7 +526,8 @@ CRotateDragDrop.prototype.decision = function() {
             for (var j = 0; j < ds.length; j++) {
                 var bidx = $(ds[j]).data("bind-box-idx");
                 if (typeof(bidx) != 'undefined') {
-                    var sw = $(ds[j]).data("weight");
+                    //var sw = $(ds[j]).data("weight");
+                    var sw = $(this.dragBox).eq(bidx).data("weight");
                     sumRight += sw;
                 }
             }
@@ -682,8 +692,8 @@ CRotateDragDrop.prototype.correct = function(deg) {
                 var boxOffsetY = b.data("offset-y");
                 if (typeof(boxOffsetY) == 'undefined') boxOffsetY = 0;
 
-                var cLeft_org = $(ds[j]).position().left + $(this.dropArea).position().left + $(this.dropArea).find(".drop_container_right").position().left;
-                var cTop_org = $(ds[j]).position().top + $(this.dropArea).position().top + $(this.dropArea).find(".drop_container_right").position().top;
+                var cLeft_org = $(ds[j]).position().left + $(this.dropArea).position().left + $(c).position().left;
+                var cTop_org = $(ds[j]).position().top + $(this.dropArea).position().top + $(c).position().top;
                 var cLeft = cLeft_org /zoom; 
                 var cTop = cTop_org /zoom + offsetY;
 
